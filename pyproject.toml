@@ -23,3 +23,6 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+asyncio_default_fixture_loop_scope = "function"
+markers = ["live: hits the network (openFDA); skipped by default, run with -m live"]
+addopts = "-m 'not live'"

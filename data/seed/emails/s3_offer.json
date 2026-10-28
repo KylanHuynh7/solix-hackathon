@@ -1,0 +1,10 @@
+{
+  "message_id": "<s3-offer-001@supplier3.example.com>",
+  "thread_id": "THREAD-CASE-001-SUP-003",
+  "sender": "morgan.chen@supplier3.example.com",
+  "to": ["jamie.park@neurobiz.example.com"],
+  "cc": [],
+  "subject": "Re: RFQ: Semaglutide injection pens - CASE-001",
+  "date": "2026-10-07T14:00:00",
+  "body": "Hi Jamie,\n\nWe are pleased to confirm availability of 1,200 pens, single lot, Lot C3300, expiry 11/2028, NDC 0169-4524-14. Storage maintained at 2-8C throughout transit. Updated unit price is USD 310.00 per pen. Lead time: 7 business days.\n\nBest regards,\nMorgan Chen\nSupplier Three Distribution\n\nOn 2026-09-28 10:00, Morgan Chen <morgan.chen@supplier3.example.com> wrote:\n> Following up on our preliminary discussion, our initial quote was USD 275.00 per pen for the same 1,200 pen single-lot order, pending final confirmation of lot and expiry.\n\nOn 2026-10-01 08:00, Jamie Park <jamie.park@neurobiz.example.com> wrote:\n> We are requesting a quote for 1,200 units of Semaglutide injection pens (NDC 0169-4524-14) for a clinical trial supply need. Customer requires single lot, minimum expiry 2028-06-30, storage 2-8C. Please provide pricing, lot number(s), expiry, and lead time.\n"
+}

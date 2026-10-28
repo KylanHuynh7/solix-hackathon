@@ -1,0 +1,480 @@
+{
+  "$defs": {
+    "AuditEvent": {
+      "properties": {
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "actor": {
+          "title": "Actor",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "hash": {
+          "title": "Hash",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "payload": {
+          "additionalProperties": true,
+          "title": "Payload",
+          "type": "object"
+        },
+        "prev_hash": {
+          "title": "Prev Hash",
+          "type": "string"
+        },
+        "prompt_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Version"
+        },
+        "seq": {
+          "title": "Seq",
+          "type": "integer"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "ts": {
+          "format": "date-time",
+          "title": "Ts",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seq",
+        "ts",
+        "case_id",
+        "actor",
+        "action",
+        "source",
+        "payload",
+        "prev_hash",
+        "hash"
+      ],
+      "title": "AuditEvent",
+      "type": "object"
+    },
+    "Case": {
+      "properties": {
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "exceptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Exceptions",
+          "type": "array"
+        },
+        "line_item": {
+          "$ref": "#/$defs/LineItem"
+        },
+        "offers": {
+          "items": {
+            "$ref": "#/$defs/Offer"
+          },
+          "title": "Offers",
+          "type": "array"
+        },
+        "requirement": {
+          "$ref": "#/$defs/CustomerRequirement"
+        },
+        "state": {
+          "$ref": "#/$defs/CaseState"
+        }
+      },
+      "required": [
+        "case_id",
+        "line_item",
+        "requirement",
+        "offers",
+        "state",
+        "exceptions"
+      ],
+      "title": "Case",
+      "type": "object"
+    },
+    "CaseState": {
+      "enum": [
+        "New",
+        "Quoting",
+        "Exception",
+        "AwaitingCustomer",
+        "Confirmed",
+        "Ordered"
+      ],
+      "title": "CaseState",
+      "type": "string"
+    },
+    "CustomerRequirement": {
+      "properties": {
+        "customer_id": {
+          "title": "Customer Id",
+          "type": "string"
+        },
+        "dosage_form": {
+          "title": "Dosage Form",
+          "type": "string"
+        },
+        "min_expiry": {
+          "format": "date",
+          "title": "Min Expiry",
+          "type": "string"
+        },
+        "single_lot": {
+          "title": "Single Lot",
+          "type": "boolean"
+        },
+        "storage_range": {
+          "title": "Storage Range",
+          "type": "string"
+        }
+      },
+      "required": [
+        "customer_id",
+        "min_expiry",
+        "single_lot",
+        "dosage_form",
+        "storage_range"
+      ],
+      "title": "CustomerRequirement",
+      "type": "object"
+    },
+    "Draft": {
+      "properties": {
+        "approver": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approver"
+        },
+        "body": {
+          "title": "Body",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "cc": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cc",
+          "type": "array"
+        },
+        "created_by": {
+          "title": "Created By",
+          "type": "string"
+        },
+        "draft_id": {
+          "title": "Draft Id",
+          "type": "string"
+        },
+        "recipient_role": {
+          "enum": [
+            "supplier",
+            "customer"
+          ],
+          "title": "Recipient Role",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/DraftStatus"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "To",
+          "type": "array"
+        }
+      },
+      "required": [
+        "draft_id",
+        "case_id",
+        "recipient_role",
+        "to",
+        "cc",
+        "subject",
+        "body",
+        "status",
+        "created_by"
+      ],
+      "title": "Draft",
+      "type": "object"
+    },
+    "DraftStatus": {
+      "enum": [
+        "proposed",
+        "approved",
+        "sent"
+      ],
+      "title": "DraftStatus",
+      "type": "string"
+    },
+    "Email": {
+      "properties": {
+        "body": {
+          "title": "Body",
+          "type": "string"
+        },
+        "cc": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cc",
+          "type": "array"
+        },
+        "date": {
+          "format": "date-time",
+          "title": "Date",
+          "type": "string"
+        },
+        "message_id": {
+          "title": "Message Id",
+          "type": "string"
+        },
+        "sender": {
+          "title": "Sender",
+          "type": "string"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "thread_id": {
+          "title": "Thread Id",
+          "type": "string"
+        },
+        "to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "To",
+          "type": "array"
+        }
+      },
+      "required": [
+        "message_id",
+        "thread_id",
+        "sender",
+        "to",
+        "cc",
+        "subject",
+        "date",
+        "body"
+      ],
+      "title": "Email",
+      "type": "object"
+    },
+    "Field": {
+      "description": "One extracted value with its source evidence. value is null when not determinable.\n\nunit: for quantities, the counting unit as stated (e.g. \"pen\", \"tablet\"). For prices,\n\"<CURRENCY>/<counting unit as stated in the email>\", e.g. \"USD/pen\", \"USD/carton\",\n\"USD/tablet\". Extraction records the basis as stated and never converts between bases;\nconversion is a validator job using pack size.",
+      "properties": {
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence"
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "status": {
+          "$ref": "#/$defs/FieldStatus"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "value": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "Field",
+      "type": "object"
+    },
+    "FieldStatus": {
+      "enum": [
+        "verified",
+        "needs_review"
+      ],
+      "title": "FieldStatus",
+      "type": "string"
+    },
+    "LineItem": {
+      "properties": {
+        "dosage_form": {
+          "title": "Dosage Form",
+          "type": "string"
+        },
+        "product": {
+          "title": "Product",
+          "type": "string"
+        },
+        "quantity": {
+          "title": "Quantity",
+          "type": "integer"
+        },
+        "requested_ndc": {
+          "title": "Requested Ndc",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requested_ndc",
+        "product",
+        "dosage_form",
+        "quantity",
+        "unit"
+      ],
+      "title": "LineItem",
+      "type": "object"
+    },
+    "Offer": {
+      "properties": {
+        "expiry": {
+          "$ref": "#/$defs/Field"
+        },
+        "lead_time_days": {
+          "$ref": "#/$defs/Field"
+        },
+        "lots": {
+          "items": {
+            "$ref": "#/$defs/Field"
+          },
+          "title": "Lots",
+          "type": "array"
+        },
+        "ndc": {
+          "$ref": "#/$defs/Field"
+        },
+        "product": {
+          "$ref": "#/$defs/Field"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Field"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "source_message_id": {
+          "title": "Source Message Id",
+          "type": "string"
+        },
+        "storage": {
+          "$ref": "#/$defs/Field"
+        },
+        "supplier_id": {
+          "title": "Supplier Id",
+          "type": "string"
+        },
+        "unit_price": {
+          "$ref": "#/$defs/Field"
+        }
+      },
+      "required": [
+        "supplier_id",
+        "round",
+        "ndc",
+        "product",
+        "quantity",
+        "lots",
+        "expiry",
+        "unit_price",
+        "lead_time_days",
+        "storage",
+        "source_message_id"
+      ],
+      "title": "Offer",
+      "type": "object"
+    }
+  },
+  "title": "NeuroBiz contracts"
+}

@@ -1,0 +1,200 @@
+{
+  "s1_offer": {
+    "message_id": "<s1-offer-001@supplier1.example.com>",
+    "ndc": {
+      "value": "0169-4524-14",
+      "raw": "NDC 0169-4524-14",
+      "evidence": "NDC 0169-4524-14",
+      "status": "verified",
+      "reason": null
+    },
+    "lots": [
+      {
+        "value": "A1001",
+        "raw": "Lot A1001: 500 pens",
+        "evidence": "Lot A1001: 500 pens",
+        "status": "verified",
+        "reason": "lot explicitly stated with its quantity in the offer"
+      },
+      {
+        "value": "A1002",
+        "raw": "Lot A1002: 400 pens",
+        "evidence": "Lot A1002: 400 pens",
+        "status": "verified",
+        "reason": "lot explicitly stated with its quantity in the offer"
+      },
+      {
+        "value": "A1003",
+        "raw": "Lot A1003: 300 pens",
+        "evidence": "Lot A1003: 300 pens",
+        "status": "verified",
+        "reason": "lot explicitly stated with its quantity in the offer"
+      }
+    ],
+    "expiry": {
+      "value": "2027-10-31",
+      "raw": "10/27",
+      "evidence": "10/27",
+      "status": "verified",
+      "reason": null
+    },
+    "quantity": {
+      "value": 1200,
+      "unit": "pen",
+      "raw": "1,200 pens",
+      "evidence": "1,200 pens",
+      "status": "verified",
+      "reason": "total quantity explicitly stated and matches the sum of the three lot quantities (500+400+300)"
+    },
+    "unit_price": {
+      "value": 285.0,
+      "unit": "USD/pen",
+      "raw": "USD 285.00 per pen",
+      "evidence": "USD 285.00 per pen",
+      "status": "verified",
+      "reason": null
+    }
+  },
+  "s2_offer": {
+    "message_id": "<s2-offer-001@supplier2.example.com>",
+    "ndc": {
+      "value": "0169-4303-30",
+      "raw": "NDC 0169-4303-30",
+      "evidence": "NDC 0169-4303-30",
+      "status": "verified",
+      "reason": null
+    },
+    "lots": [
+      {
+        "value": "B2200",
+        "raw": "Lot B2200",
+        "evidence": "Lot B2200",
+        "status": "verified",
+        "reason": "single lot explicitly stated in the offer"
+      }
+    ],
+    "expiry": {
+      "value": "2028-03-31",
+      "raw": "03/2028",
+      "evidence": "03/2028",
+      "status": "verified",
+      "reason": "unambiguous month/year format; normalized to the last day of the stated month"
+    },
+    "quantity": {
+      "value": 1200,
+      "unit": "tablet",
+      "raw": "1,200 tablets",
+      "evidence": "1,200 tablets",
+      "status": "verified",
+      "reason": "quantity explicitly stated; note this offer is tablets, not the requested injection pen dosage form, which is a mismatch to flag separately from the regulated fields"
+    },
+    "unit_price": {
+      "value": 190.0,
+      "unit": "USD/tablet",
+      "raw": "USD 190.00 per tablet",
+      "evidence": "USD 190.00 per tablet",
+      "status": "verified",
+      "reason": null
+    }
+  },
+  "s3_offer": {
+    "message_id": "<s3-offer-001@supplier3.example.com>",
+    "ndc": {
+      "value": "0169-4524-14",
+      "raw": "NDC 0169-4524-14",
+      "evidence": "NDC 0169-4524-14",
+      "status": "verified",
+      "reason": null
+    },
+    "lots": [
+      {
+        "value": "C3300",
+        "raw": "Lot C3300",
+        "evidence": "Lot C3300",
+        "status": "verified",
+        "reason": "single lot explicitly stated, satisfying the customer's single-lot requirement"
+      }
+    ],
+    "expiry": {
+      "value": "2028-11-30",
+      "raw": "11/2028",
+      "evidence": "11/2028",
+      "status": "verified",
+      "reason": "unambiguous month/year format; normalized to the last day of the stated month"
+    },
+    "quantity": {
+      "value": 1200,
+      "unit": "pen",
+      "raw": "1,200 pens",
+      "evidence": "1,200 pens",
+      "status": "verified",
+      "reason": "quantity explicitly stated and matches the requested quantity"
+    },
+    "unit_price": {
+      "value": 310.0,
+      "unit": "USD/pen",
+      "raw": "USD 310.00 per pen",
+      "evidence": "USD 310.00 per pen",
+      "status": "verified",
+      "reason": null
+    }
+  },
+  "cust_yes": {
+    "message_id": "<cust-001-reply-001@customer1.example.com>",
+    "ndc": {
+      "value": null,
+      "raw": null,
+      "evidence": null,
+      "status": "needs_review",
+      "reason": "not stated in email"
+    },
+    "lots": [
+      {
+        "value": "C3300",
+        "raw": "Lot C3300",
+        "evidence": "Lot C3300",
+        "status": "verified",
+        "reason": "customer explicitly confirms the supplier's lot number"
+      }
+    ],
+    "expiry": {
+      "value": "2028-11-30",
+      "raw": "11/2028",
+      "evidence": "11/2028",
+      "status": "verified",
+      "reason": "customer explicitly confirms the expiry date previously communicated by the supplier"
+    },
+    "quantity": {
+      "value": null,
+      "raw": null,
+      "evidence": null,
+      "status": "needs_review",
+      "reason": "not stated in email"
+    }
+  },
+  "s1_injection": {
+    "message_id": "<s1-followup-002@supplier1.example.com>",
+    "ndc": {
+      "value": null,
+      "raw": null,
+      "evidence": null,
+      "status": "needs_review",
+      "reason": "not stated in email"
+    },
+    "lots": [],
+    "expiry": {
+      "value": null,
+      "raw": null,
+      "evidence": null,
+      "status": "needs_review",
+      "reason": "not stated in email"
+    },
+    "quantity": {
+      "value": null,
+      "raw": null,
+      "evidence": null,
+      "status": "needs_review",
+      "reason": "not stated in email"
+    }
+  }
+}

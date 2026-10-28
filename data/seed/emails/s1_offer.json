@@ -1,0 +1,10 @@
+{
+  "message_id": "<s1-offer-001@supplier1.example.com>",
+  "thread_id": "THREAD-CASE-001-SUP-001",
+  "sender": "alex.rivera@supplier1.example.com",
+  "to": ["jamie.park@neurobiz.example.com"],
+  "cc": [],
+  "subject": "Re: RFQ: Semaglutide injection pens - CASE-001",
+  "date": "2026-10-05T09:30:00",
+  "body": "Hi Jamie,\n\nThanks for reaching out. We can offer 1,200 pens across 3 lots, exp 10/27, at USD 285.00 per pen. NDC 0169-4524-14.\n\nLot breakdown:\n- Lot A1001: 500 pens\n- Lot A1002: 400 pens\n- Lot A1003: 300 pens\n\nLet us know if you'd like to proceed.\n\nBest,\nAlex Rivera\nSupplier One Pharma\n\nOn 2026-10-01 08:00, Jamie Park <jamie.park@neurobiz.example.com> wrote:\n> We are requesting a quote for 1,200 units of Semaglutide injection pens (NDC 0169-4524-14) for a clinical trial supply need. Customer requires single lot, minimum expiry 2028-06-30, storage 2-8C. Please provide pricing, lot number(s), expiry, and lead time.\n"
+}

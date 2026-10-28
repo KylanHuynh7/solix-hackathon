@@ -1,0 +1,10 @@
+{
+  "message_id": "<cust-001-reply-001@customer1.example.com>",
+  "thread_id": "THREAD-CASE-001-CUST-001",
+  "sender": "taylor.brooks@customer1.example.com",
+  "to": ["jamie.park@neurobiz.example.com"],
+  "cc": [],
+  "subject": "Re: Confirmation needed: Semaglutide pens for clinical trial - CASE-001",
+  "date": "2026-10-08T09:00:00",
+  "body": "Hi Jamie,\n\nThanks for the update. We confirm acceptance of Supplier Three's offer: Lot C3300, expiry 11/2028. This satisfies our clinical trial supply requirements for the upcoming study enrollment.\n\nPlease proceed with the order.\n\nBest,\nTaylor Brooks\nBuyer One Health System"
+}

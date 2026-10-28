@@ -1,0 +1,10 @@
+{
+  "message_id": "<s2-offer-001@supplier2.example.com>",
+  "thread_id": "THREAD-CASE-001-SUP-002",
+  "sender": "jordan.lee@supplier2.example.com",
+  "to": ["jamie.park@neurobiz.example.com"],
+  "cc": [],
+  "subject": "Re: RFQ: Semaglutide injection pens - CASE-001",
+  "date": "2026-10-06T11:15:00",
+  "body": "Hello Jamie,\n\nThank you for the inquiry. We have semaglutide tablets available (NDC 0169-4303-30), 1,200 tablets, Lot B2200, expiry 03/2028, at USD 190.00 per tablet. Note this is the oral tablet formulation, not an injection pen.\n\nLead time is 10 business days.\n\nRegards,\nJordan Lee\nSupplier Two BioSupply\n\nOn 2026-10-01 08:00, Jamie Park <jamie.park@neurobiz.example.com> wrote:\n> We are requesting a quote for 1,200 units of Semaglutide injection pens (NDC 0169-4524-14) for a clinical trial supply need. Customer requires single lot, minimum expiry 2028-06-30, storage 2-8C. Please provide pricing, lot number(s), expiry, and lead time.\n"
+}

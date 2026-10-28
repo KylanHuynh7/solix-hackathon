@@ -1,0 +1,38 @@
+{
+  "0169-4303-30": {
+    "active_ingredients": [
+      {
+        "name": "SEMAGLUTIDE",
+        "strength": "3 mg/1"
+      }
+    ],
+    "brand_name": "RYBELSUS",
+    "dosage_form": "TABLET",
+    "fetched_at": "2026-10-28T20:44:35.484723+00:00",
+    "generic_name": "oral semaglutide",
+    "package_description": "30 TABLET in 1 BOTTLE, PLASTIC (0169-4303-30)",
+    "package_ndc": "0169-4303-30",
+    "product_ndc": "0169-4303",
+    "route": [
+      "ORAL"
+    ]
+  },
+  "0169-4524-14": {
+    "active_ingredients": [
+      {
+        "name": "SEMAGLUTIDE",
+        "strength": "2.4 mg/.75mL"
+      }
+    ],
+    "brand_name": "WEGOVY",
+    "dosage_form": "INJECTION, SOLUTION",
+    "fetched_at": "2026-10-28T20:44:35.484723+00:00",
+    "generic_name": "semaglutide",
+    "package_description": "4 SYRINGE, PLASTIC in 1 CARTON (0169-4524-14)  / .75 mL in 1 SYRINGE, PLASTIC (0169-4524-01)",
+    "package_ndc": "0169-4524-14",
+    "product_ndc": "0169-4524",
+    "route": [
+      "SUBCUTANEOUS"
+    ]
+  }
+}
