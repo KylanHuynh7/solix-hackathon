@@ -123,7 +123,7 @@ def _month_end(year: int, month: int) -> str:
     return date(year, month, calendar.monthrange(year, month)[1]).isoformat()
 
 
-def parse_expiry(raw: str) -> Field:
+def _expiry_exact(raw: str) -> Field:
     text = (raw or "").strip()
 
     if m := re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", text):
@@ -184,7 +184,7 @@ _UNITS = {
 }
 
 
-def parse_quantity(raw: str) -> Field:
+def _quantity_exact(raw: str) -> Field:
     text = (raw or "").strip()
     m = re.fullmatch(r"(\d{1,3}(?:,\d{3})+|\d+)\s*([A-Za-z]+)?", text)
     if not m:
@@ -199,7 +199,7 @@ def parse_quantity(raw: str) -> Field:
     return _field(value, raw, _V, unit=unit)
 
 
-def parse_price(raw: str) -> Field:
+def _price_exact(raw: str) -> Field:
     text = (raw or "").strip()
     m = re.fullmatch(
         r"(?:(USD)\s*|(\$)\s*)(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(?:\s*(?:per|/)\s*([A-Za-z]+))?",
@@ -216,3 +216,59 @@ def parse_price(raw: str) -> Field:
     if unit is None:
         return _field(value, raw, _R, f"unknown pricing basis '{basis}'")
     return _field(value, raw, _V, unit=f"USD/{unit}")
+
+
+# --- searching inside a longer quote ---------------------------------------
+
+_MULTIPLE = "multiple candidate values in quote"
+_NUM = r"(?:\d{1,3}(?:,\d{3})+|\d+)"
+_UNIT_WORDS = "|".join(sorted(_UNITS, key=len, reverse=True))
+_QTY_KNOWN = re.compile(rf"(?<![\w,.]){_NUM}\s*(?:{_UNIT_WORDS})\b", re.IGNORECASE)
+_QTY_ANY = re.compile(rf"(?<![\w,.]){_NUM}(?:\s*[A-Za-z]+)?\b", re.IGNORECASE)
+_PRICE = re.compile(
+    rf"(?<![A-Za-z])(?:USD\s*|\$\s*){_NUM}(?:\.\d+)?(?:\s*(?:per\b|/)\s*[A-Za-z]+)?",
+    re.IGNORECASE,
+)
+_MONTH_WORDS = "|".join(sorted(_MONTHS, key=len, reverse=True))
+_EXPIRY = re.compile(
+    r"(?<![\w/-])(?:"
+    r"\d{4}-\d{2}-\d{2}"
+    r"|\d{1,2}/\d{1,2}/\d{4}"
+    r"|\d{1,2}/\d{4}"
+    r"|\d{1,2}/\d{2}"
+    r"|\d{4}-\d{2}"
+    rf"|(?:{_MONTH_WORDS})\.?,?\s+\d{{4}}"
+    r")(?![\w/-])",
+    re.IGNORECASE,
+)
+
+
+def _search(raw: str, matches: list[str], exact) -> Field:
+    """Parse the single distinct match inside the quote; evidence stays the whole quote."""
+    parsed = {}
+    for m in matches:
+        f = exact(m)
+        key = (f.value, f.unit, m if f.value is None else None)
+        parsed.setdefault(key, (m, f))
+    if len(parsed) > 1:
+        return _field(None, raw, _R, _MULTIPLE)
+    m, f = next(iter(parsed.values()))
+    return f.model_copy(update={"raw": m, "evidence": raw})
+
+
+def parse_quantity(raw: str) -> Field:
+    text = raw or ""
+    matches = [m.group(0) for m in _QTY_KNOWN.finditer(text)] or [
+        m.group(0) for m in _QTY_ANY.finditer(text)
+    ]
+    return _search(raw, matches, _quantity_exact) if matches else _quantity_exact(raw)
+
+
+def parse_price(raw: str) -> Field:
+    matches = [m.group(0) for m in _PRICE.finditer(raw or "")]
+    return _search(raw, matches, _price_exact) if matches else _price_exact(raw)
+
+
+def parse_expiry(raw: str) -> Field:
+    matches = [m.group(0) for m in _EXPIRY.finditer(raw or "")]
+    return _search(raw, matches, _expiry_exact) if matches else _expiry_exact(raw)

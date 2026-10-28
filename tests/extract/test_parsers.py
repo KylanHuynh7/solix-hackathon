@@ -285,3 +285,36 @@ def test_price_from_cleaned_s3_text_is_current_not_old():
     assert got.value == 310.0
     assert got.evidence in cleaned.new_text
     assert got.evidence not in cleaned.quoted_text
+
+
+# --- searching inside a longer quote ---
+
+def test_quantity_found_inside_quote():
+    f = parse_quantity("1,200 pens across 3 lots")
+    assert (f.value, f.unit, f.status.value) == (1200, "pen", "verified")
+    assert f.raw == "1,200 pens" and f.evidence == "1,200 pens across 3 lots"
+
+
+def test_expiry_found_inside_quote():
+    f = parse_expiry("exp 10/27")
+    assert (f.value, f.status.value, f.raw, f.evidence) == ("2027-10-31", "verified", "10/27", "exp 10/27")
+
+
+def test_price_found_inside_quote():
+    f = parse_price("at USD 285.00 per pen. NDC 0169-4524-14")
+    assert (f.value, f.unit, f.status.value, f.raw) == (285.0, "USD/pen", "verified", "USD 285.00 per pen")
+
+
+def test_multiple_different_candidates_need_review():
+    for fn, text in [
+        (parse_quantity, "500 pens and 400 pens"),
+        (parse_price, "USD 275.00 per pen, now USD 310.00 per pen"),
+        (parse_expiry, "10/27 or 03/2028"),
+    ]:
+        f = fn(text)
+        assert f.value is None and f.status.value == "needs_review"
+        assert f.reason == "multiple candidate values in quote"
+
+
+def test_repeated_identical_candidate_is_not_multiple():
+    assert parse_quantity("1,200 pens (that is 1,200 pens)").value == 1200
