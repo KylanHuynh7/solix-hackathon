@@ -424,3 +424,334 @@ code {
   font-weight: 700;
   outline: 2px solid #e0b800;
 }
+
+/* Navigation and demo bar */
+.nav {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nav-item {
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  color: #c9ced6;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-item:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.nav-active {
+  color: #fff;
+  background: rgb(255 255 255 / 0.16);
+}
+
+.nav-count {
+  background: #f5b400;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.tagline {
+  text-align: right;
+}
+
+@media (max-width: 1100px) {
+  .tagline {
+    display: none;
+  }
+}
+
+.demo-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 2rem;
+  background: #e9edf5;
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-next {
+  font-weight: 600;
+}
+
+.demo-message {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* Buttons and inputs */
+.button-primary,
+.button-danger {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+}
+
+.button-danger {
+  background: var(--danger-fg);
+}
+
+.button-primary:hover:not(:disabled) {
+  background: #173fae;
+}
+
+.button-primary:disabled,
+.button-danger:disabled,
+.button-ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input {
+  font: inherit;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+
+.input:focus {
+  outline: 3px solid #b9cbff;
+  border-color: var(--accent);
+}
+
+.textarea {
+  font-size: 1rem;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.reject-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.tab .count {
+  background: var(--neutral-bg);
+  border-radius: 999px;
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+}
+
+.tab-active {
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+}
+
+.tab-active .count {
+  background: rgb(255 255 255 / 0.2);
+}
+
+/* Review queue */
+.draft {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.draft-sent {
+  border-color: var(--ok-fg);
+  box-shadow: 0 0 0 3px var(--ok-bg);
+}
+
+.draft-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.reasons {
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+}
+
+.reasons p,
+.reasons ul {
+  margin: 0.25rem 0 0;
+}
+
+.reasons ul {
+  padding-left: 1.2rem;
+}
+
+.reasons-fail {
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+}
+
+.reasons-ok {
+  background: var(--ok-bg);
+  color: var(--ok-fg);
+}
+
+.sent-note {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ok-fg);
+}
+
+/* Approver modal */
+.modal-backdrop {
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: min(460px, calc(100% - 32px));
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.9rem;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.3);
+}
+
+.modal p {
+  margin: 0;
+}
+
+/* Audit */
+.verify-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.verify-card p {
+  margin: 0;
+  max-width: 640px;
+}
+
+.verify-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.verify {
+  font-weight: 800;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+}
+
+.verify-ok {
+  background: var(--ok-bg);
+  color: var(--ok-fg);
+}
+
+.verify-bad {
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+}
+
+.audit td {
+  font-size: 0.92rem;
+}
+
+.audit .payload {
+  color: var(--muted);
+  word-break: break-word;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.actor-human {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.row-denied {
+  background: var(--danger-bg);
+}
+
+.row-denied td {
+  color: var(--danger-fg);
+  font-weight: 600;
+}
+
+.row-warn {
+  background: #fff8e1;
+}
+
+.row-ok {
+  background: #f0faf3;
+}
+
+/* SAP panel */
+.intents {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.intent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.intent-done {
+  display: grid;
+  justify-items: end;
+}
+
+.doc-number {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--ok-fg);
+}

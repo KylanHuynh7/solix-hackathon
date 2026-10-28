@@ -1,15 +1,9 @@
-import { useEffect, useState } from 'react'
 import { listCases } from '../api'
 import { StateBadge } from '../components/Badges'
-import type { Case } from '../types/contracts'
+import { useLoad } from '../session'
 
 export function CaseList({ onOpen }: { onOpen: (caseId: string) => void }) {
-  const [cases, setCases] = useState<Case[] | null>(null)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    listCases().then(setCases, (e: Error) => setError(e.message))
-  }, [])
+  const [cases, error] = useLoad(listCases)
 
   if (error) return <p className="warning">Could not load cases: {error}</p>
   if (!cases) return <p className="muted">Loading cases…</p>

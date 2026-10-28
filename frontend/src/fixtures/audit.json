@@ -1,22 +1,22 @@
 [
   {
     "seq": 1,
-    "ts": "2026-10-28T23:01:07.295419Z",
+    "ts": "2026-10-28T23:08:31.413693Z",
     "case_id": "CASE-001",
     "actor": "system",
     "action": "demo_reset",
     "source": "api",
     "payload": {
-      "ledger_file": "ledger-20261028T230107-09433e.db"
+      "ledger_file": "ledger-20261028T230831-2d871a.db"
     },
     "model": null,
     "prompt_version": null,
     "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-    "hash": "e666ed1334478fdc8a83ce7e9377e5e2a750d5153b1297749b4817714863847b"
+    "hash": "bec22a5a2e9f49ab6847d04d1f85e8c19e0ff72e53b86fe460b4c861b7f36327"
   },
   {
     "seq": 2,
-    "ts": "2026-10-28T23:01:07.302457Z",
+    "ts": "2026-10-28T23:08:31.420076Z",
     "case_id": "CASE-001",
     "actor": "system",
     "action": "email_ingested",
@@ -28,12 +28,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "e666ed1334478fdc8a83ce7e9377e5e2a750d5153b1297749b4817714863847b",
-    "hash": "968bb8c2ead722972dcaaa3d69a678b680548fa1b38137d31882ad1d194efe3d"
+    "prev_hash": "bec22a5a2e9f49ab6847d04d1f85e8c19e0ff72e53b86fe460b4c861b7f36327",
+    "hash": "3c6828fae3f828a9472c62a990a2fc082e0d923d30023ef6f3ec6ae8a2debe55"
   },
   {
     "seq": 3,
-    "ts": "2026-10-28T23:01:07.303909Z",
+    "ts": "2026-10-28T23:08:31.421508Z",
     "case_id": "CASE-001",
     "actor": "extractor",
     "action": "fields_extracted",
@@ -54,12 +54,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "968bb8c2ead722972dcaaa3d69a678b680548fa1b38137d31882ad1d194efe3d",
-    "hash": "3b677ff4a41942bdca7c355344d2e763f3180209c9bddf18d4e68b5f219d74b0"
+    "prev_hash": "3c6828fae3f828a9472c62a990a2fc082e0d923d30023ef6f3ec6ae8a2debe55",
+    "hash": "54fca35f29908790343576ca8098ff0562bee31a9efae4efaab02411daf100c3"
   },
   {
     "seq": 4,
-    "ts": "2026-10-28T23:01:07.304997Z",
+    "ts": "2026-10-28T23:08:31.422699Z",
     "case_id": "CASE-001",
     "actor": "orchestrator",
     "action": "check_failed",
@@ -70,12 +70,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "3b677ff4a41942bdca7c355344d2e763f3180209c9bddf18d4e68b5f219d74b0",
-    "hash": "b685603f432939c2d042c301e92ee2a7eb4f421da05018c614812c753a76b0b2"
+    "prev_hash": "54fca35f29908790343576ca8098ff0562bee31a9efae4efaab02411daf100c3",
+    "hash": "21495694a513db241ac2846a1d9d891b88dafbe42e87e6fc2dc7d4c9d35a35c7"
   },
   {
     "seq": 5,
-    "ts": "2026-10-28T23:01:07.306072Z",
+    "ts": "2026-10-28T23:08:31.423678Z",
     "case_id": "CASE-001",
     "actor": "orchestrator",
     "action": "check_failed",
@@ -86,12 +86,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "b685603f432939c2d042c301e92ee2a7eb4f421da05018c614812c753a76b0b2",
-    "hash": "d1aab6fa27b51d134e7d5281adcfa327cbb1c776d289ab75e20440ffa0bc595f"
+    "prev_hash": "21495694a513db241ac2846a1d9d891b88dafbe42e87e6fc2dc7d4c9d35a35c7",
+    "hash": "9fb450dd2689e60c70db16c2ba66d63169dea389bd5f869a23ec1465145f2866"
   },
   {
     "seq": 6,
-    "ts": "2026-10-28T23:01:07.307091Z",
+    "ts": "2026-10-28T23:08:31.424641Z",
     "case_id": "CASE-001",
     "actor": "orchestrator",
     "action": "case_state_changed",
@@ -103,29 +103,29 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "d1aab6fa27b51d134e7d5281adcfa327cbb1c776d289ab75e20440ffa0bc595f",
-    "hash": "6d4ab4f87b082c3a4f78283dcb5abad2f32b6d6c12d6a9acb34980208693c0af"
+    "prev_hash": "9fb450dd2689e60c70db16c2ba66d63169dea389bd5f869a23ec1465145f2866",
+    "hash": "dcb1fb2ec3172def6a4678df5945f1a1d35087cc8116a0a0ad00bcd63559c79e"
   },
   {
     "seq": 7,
-    "ts": "2026-10-28T23:01:07.309422Z",
+    "ts": "2026-10-28T23:08:31.426763Z",
     "case_id": "CASE-001",
     "actor": "negotiator",
     "action": "draft_proposed",
     "source": "demo_stub",
     "payload": {
-      "draft_id": "DRAFT-3a877504",
+      "draft_id": "DRAFT-31e916e8",
       "recipient_role": "supplier",
       "subject": "Re: RFQ: Semaglutide injection pens - CASE-001"
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "6d4ab4f87b082c3a4f78283dcb5abad2f32b6d6c12d6a9acb34980208693c0af",
-    "hash": "85c177b8213e8562d07ba3c5c2f725b9adf1d43931208260a558338a249056cd"
+    "prev_hash": "dcb1fb2ec3172def6a4678df5945f1a1d35087cc8116a0a0ad00bcd63559c79e",
+    "hash": "72ea811c57748311c381bee4cb3b73d63eacd78a1623d307dcdb202154fffadd"
   },
   {
     "seq": 8,
-    "ts": "2026-10-28T23:01:07.316083Z",
+    "ts": "2026-10-28T23:08:31.432595Z",
     "case_id": "CASE-001",
     "actor": "system",
     "action": "email_ingested",
@@ -137,12 +137,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "85c177b8213e8562d07ba3c5c2f725b9adf1d43931208260a558338a249056cd",
-    "hash": "07013d5f4caa692b295701a5b986ba654770806df2f1f17d0eef894de44c7f87"
+    "prev_hash": "72ea811c57748311c381bee4cb3b73d63eacd78a1623d307dcdb202154fffadd",
+    "hash": "354e46e5ac67bb5b468c33a9416ad7d24f23751b80b636a20db502a099848ce1"
   },
   {
     "seq": 9,
-    "ts": "2026-10-28T23:01:07.317451Z",
+    "ts": "2026-10-28T23:08:31.433824Z",
     "case_id": "CASE-001",
     "actor": "extractor",
     "action": "fields_extracted",
@@ -161,12 +161,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "07013d5f4caa692b295701a5b986ba654770806df2f1f17d0eef894de44c7f87",
-    "hash": "1f2743fbefa149bded7b4b03f6e21803a7eb515a3532517ae8dff8590280b7c6"
+    "prev_hash": "354e46e5ac67bb5b468c33a9416ad7d24f23751b80b636a20db502a099848ce1",
+    "hash": "d3fe026c58023936d5d1300d90996f04bc4216c4dda9738674c7a3ff1ca6fc64"
   },
   {
     "seq": 10,
-    "ts": "2026-10-28T23:01:07.318652Z",
+    "ts": "2026-10-28T23:08:31.434933Z",
     "case_id": "CASE-001",
     "actor": "orchestrator",
     "action": "check_failed",
@@ -177,12 +177,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "1f2743fbefa149bded7b4b03f6e21803a7eb515a3532517ae8dff8590280b7c6",
-    "hash": "bcd1a8a65fa176c5d2e8a314bb1ad661541c31a0c091af9cb19755920021ef07"
+    "prev_hash": "d3fe026c58023936d5d1300d90996f04bc4216c4dda9738674c7a3ff1ca6fc64",
+    "hash": "b0808fad6a9e4b14d5f0497553631bc589d6d8baf7961dffe7bc1829c0e2c707"
   },
   {
     "seq": 11,
-    "ts": "2026-10-28T23:01:07.324574Z",
+    "ts": "2026-10-28T23:08:31.440184Z",
     "case_id": "CASE-001",
     "actor": "system",
     "action": "email_ingested",
@@ -194,12 +194,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "bcd1a8a65fa176c5d2e8a314bb1ad661541c31a0c091af9cb19755920021ef07",
-    "hash": "98f14d05f7e4b3b8821c678cb1394f8b257556bf699d787823981935237d38e2"
+    "prev_hash": "b0808fad6a9e4b14d5f0497553631bc589d6d8baf7961dffe7bc1829c0e2c707",
+    "hash": "f591bcc4185f77d9776f99e487d12ea75c1fdd59e03fe68fa94bb71fe3cd9d97"
   },
   {
     "seq": 12,
-    "ts": "2026-10-28T23:01:07.325936Z",
+    "ts": "2026-10-28T23:08:31.441275Z",
     "case_id": "CASE-001",
     "actor": "extractor",
     "action": "fields_extracted",
@@ -218,12 +218,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "98f14d05f7e4b3b8821c678cb1394f8b257556bf699d787823981935237d38e2",
-    "hash": "c8cdddcc66efc86c6bd5673588aa56fecb405ad1d5cec630a4f7f308eb82302c"
+    "prev_hash": "f591bcc4185f77d9776f99e487d12ea75c1fdd59e03fe68fa94bb71fe3cd9d97",
+    "hash": "01920668eeb763cccc9d1a78f4ece8a8f36b4837307787f27150dec9f1da8ae2"
   },
   {
     "seq": 13,
-    "ts": "2026-10-28T23:01:07.327048Z",
+    "ts": "2026-10-28T23:08:31.442321Z",
     "case_id": "CASE-001",
     "actor": "orchestrator",
     "action": "case_state_changed",
@@ -235,29 +235,29 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "c8cdddcc66efc86c6bd5673588aa56fecb405ad1d5cec630a4f7f308eb82302c",
-    "hash": "dfa94563b0e65d67ab352ed8b33583cc7e8987018132b168f7a465c8782541b8"
+    "prev_hash": "01920668eeb763cccc9d1a78f4ece8a8f36b4837307787f27150dec9f1da8ae2",
+    "hash": "76589cf9f3ea728bf5734337741b845db55d02ed71f74bd013363c97be9d40a1"
   },
   {
     "seq": 14,
-    "ts": "2026-10-28T23:01:07.329205Z",
+    "ts": "2026-10-28T23:08:31.444113Z",
     "case_id": "CASE-001",
     "actor": "confirmer",
     "action": "draft_proposed",
     "source": "demo_stub",
     "payload": {
-      "draft_id": "DRAFT-c7f87caa",
+      "draft_id": "DRAFT-e3a060bb",
       "recipient_role": "customer",
       "subject": "Confirmation needed: Semaglutide pens for clinical trial - CASE-001"
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "dfa94563b0e65d67ab352ed8b33583cc7e8987018132b168f7a465c8782541b8",
-    "hash": "b97b9272b3c5bf04de718bfd089dcbf4f3dcc602d1fa4a39b730e2502e15308f"
+    "prev_hash": "76589cf9f3ea728bf5734337741b845db55d02ed71f74bd013363c97be9d40a1",
+    "hash": "13ee7c4a4b2d198e3e49d07d350182bdf5359044e8c17a6f3845097c22ba3408"
   },
   {
     "seq": 15,
-    "ts": "2026-10-28T23:01:07.335101Z",
+    "ts": "2026-10-28T23:08:31.449600Z",
     "case_id": "CASE-001",
     "actor": "system",
     "action": "email_ingested",
@@ -269,12 +269,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "b97b9272b3c5bf04de718bfd089dcbf4f3dcc602d1fa4a39b730e2502e15308f",
-    "hash": "1227fb4d8fae5534fab59980b539f21fcdde5ba05e6f7684ae12646fa82997b5"
+    "prev_hash": "13ee7c4a4b2d198e3e49d07d350182bdf5359044e8c17a6f3845097c22ba3408",
+    "hash": "3bb6d835ddb25f3c2777ba5a96595e4c73eee0d5446774929ed8b21ac0ecc16f"
   },
   {
     "seq": 16,
-    "ts": "2026-10-28T23:01:07.336146Z",
+    "ts": "2026-10-28T23:08:31.450656Z",
     "case_id": "CASE-001",
     "actor": "orchestrator",
     "action": "tool_denied",
@@ -286,12 +286,97 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "1227fb4d8fae5534fab59980b539f21fcdde5ba05e6f7684ae12646fa82997b5",
-    "hash": "829672af835afbffaba15eba7ec7732452c3bc65fdad2d19370fc0a7b0c91aa6"
+    "prev_hash": "3bb6d835ddb25f3c2777ba5a96595e4c73eee0d5446774929ed8b21ac0ecc16f",
+    "hash": "65132bb9d057f1e278719023d2e3f4f44bed12d64294fb985d61b3cdf9112cc5"
   },
   {
     "seq": 17,
-    "ts": "2026-10-28T23:01:07.340508Z",
+    "ts": "2026-10-28T23:08:31.457150Z",
+    "case_id": "CASE-001",
+    "actor": "system",
+    "action": "email_ingested",
+    "source": "demo_stub",
+    "payload": {
+      "message_id": "<cust-001-reply-001@customer1.example.com>",
+      "sender": "taylor.brooks@customer1.example.com",
+      "subject": "Re: Confirmation needed: Semaglutide pens for clinical trial - CASE-001"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "65132bb9d057f1e278719023d2e3f4f44bed12d64294fb985d61b3cdf9112cc5",
+    "hash": "1db205936599c2505ad605cecdf4813a87171993bf213c1a2f2233fdd741b9bd"
+  },
+  {
+    "seq": 18,
+    "ts": "2026-10-28T23:08:31.458341Z",
+    "case_id": "CASE-001",
+    "actor": "orchestrator",
+    "action": "case_state_changed",
+    "source": "demo_stub",
+    "payload": {
+      "from": "Quoting",
+      "reason": "customer confirmed Supplier Three offer",
+      "to": "Confirmed"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "1db205936599c2505ad605cecdf4813a87171993bf213c1a2f2233fdd741b9bd",
+    "hash": "d08c79634e5bab7de8d50079286a87a85b6f5f837f84758ab734679d5a6e74bb"
+  },
+  {
+    "seq": 19,
+    "ts": "2026-10-28T23:08:31.460531Z",
+    "case_id": "CASE-001",
+    "actor": "confirmer",
+    "action": "tool_call",
+    "source": "demo_stub",
+    "payload": {
+      "doc_type": "rfq",
+      "intent_id": "SAPI-b3ad83a8",
+      "tool": "propose_sap_document"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "d08c79634e5bab7de8d50079286a87a85b6f5f837f84758ab734679d5a6e74bb",
+    "hash": "774d1af8a51c1dc743e8feeef7a4f21207e665ce1e0b54f30cc34a4017293b30"
+  },
+  {
+    "seq": 20,
+    "ts": "2026-10-28T23:08:31.462698Z",
+    "case_id": "CASE-001",
+    "actor": "confirmer",
+    "action": "tool_call",
+    "source": "demo_stub",
+    "payload": {
+      "doc_type": "supplier_quotation",
+      "intent_id": "SAPI-45f37854",
+      "tool": "propose_sap_document"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "774d1af8a51c1dc743e8feeef7a4f21207e665ce1e0b54f30cc34a4017293b30",
+    "hash": "0c5f21c5f1729f8bc2bb299005a32b9a14ab90c77277e92049439ef0e3d36bfc"
+  },
+  {
+    "seq": 21,
+    "ts": "2026-10-28T23:08:31.464838Z",
+    "case_id": "CASE-001",
+    "actor": "confirmer",
+    "action": "tool_call",
+    "source": "demo_stub",
+    "payload": {
+      "doc_type": "purchase_order",
+      "intent_id": "SAPI-55692580",
+      "tool": "propose_sap_document"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "0c5f21c5f1729f8bc2bb299005a32b9a14ab90c77277e92049439ef0e3d36bfc",
+    "hash": "021ab220407c1a842eb5f12ef6ffd760214025753561aad35199e4a4d7c184c4"
+  },
+  {
+    "seq": 22,
+    "ts": "2026-10-28T23:08:31.469018Z",
     "case_id": "CASE-001",
     "actor": "negotiator",
     "action": "draft_proposed",
@@ -302,12 +387,12 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "829672af835afbffaba15eba7ec7732452c3bc65fdad2d19370fc0a7b0c91aa6",
-    "hash": "eef8c96aa085706cc02ebc369669912d756136d642fb1c19446d1b5d1fdb6c11"
+    "prev_hash": "021ab220407c1a842eb5f12ef6ffd760214025753561aad35199e4a4d7c184c4",
+    "hash": "d92371f5f85675c8f28beb76f3a98eb415a19bb6ce06e2f2a8ad567294754037"
   },
   {
-    "seq": 18,
-    "ts": "2026-10-28T23:01:07.345084Z",
+    "seq": 23,
+    "ts": "2026-10-28T23:08:31.473154Z",
     "case_id": "CASE-001",
     "actor": "human:Jamie Park",
     "action": "draft_rejected",
@@ -318,7 +403,7 @@
     },
     "model": null,
     "prompt_version": null,
-    "prev_hash": "eef8c96aa085706cc02ebc369669912d756136d642fb1c19446d1b5d1fdb6c11",
-    "hash": "878eb03958614885e30bfe53544e029890e3b0ae5ef0d9836a92d09c07e864d9"
+    "prev_hash": "d92371f5f85675c8f28beb76f3a98eb415a19bb6ce06e2f2a8ad567294754037",
+    "hash": "e02f8d260a8095cbbbdaf26f9d9ea324306173b4261a4422683eecf95e01c00a"
   }
 ]

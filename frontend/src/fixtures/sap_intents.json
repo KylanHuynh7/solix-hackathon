@@ -1,0 +1,57 @@
+[
+  {
+    "intent_id": "SAPI-b3ad83a8",
+    "case_id": "CASE-001",
+    "doc_type": "rfq",
+    "payload": {
+      "CaseId": "CASE-001",
+      "Material": "0169-4524-14",
+      "Quantity": 300,
+      "Unit": "carton",
+      "Supplier": "SUP-003",
+      "Batch": "C3300",
+      "ShelfLifeExpiry": "2028-11-30"
+    },
+    "status": "proposed",
+    "approver": null,
+    "document_number": null
+  },
+  {
+    "intent_id": "SAPI-45f37854",
+    "case_id": "CASE-001",
+    "doc_type": "supplier_quotation",
+    "payload": {
+      "CaseId": "CASE-001",
+      "Material": "0169-4524-14",
+      "Quantity": 300,
+      "Unit": "carton",
+      "Supplier": "SUP-003",
+      "Batch": "C3300",
+      "ShelfLifeExpiry": "2028-11-30",
+      "NetPrice": 1240.0,
+      "Currency": "USD"
+    },
+    "status": "proposed",
+    "approver": null,
+    "document_number": null
+  },
+  {
+    "intent_id": "SAPI-55692580",
+    "case_id": "CASE-001",
+    "doc_type": "purchase_order",
+    "payload": {
+      "CaseId": "CASE-001",
+      "Material": "0169-4524-14",
+      "Quantity": 300,
+      "Unit": "carton",
+      "Supplier": "SUP-003",
+      "Batch": "C3300",
+      "ShelfLifeExpiry": "2028-11-30",
+      "NetPrice": 1240.0,
+      "Currency": "USD"
+    },
+    "status": "proposed",
+    "approver": null,
+    "document_number": null
+  }
+]

@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { customerName, getCase, supplierName } from '../api'
 import { FieldStatusBadge, StateBadge } from '../components/Badges'
 import { EmailPanel, type EvidenceSelection } from '../components/EmailPanel'
+import { SapPanel } from '../components/SapPanel'
 import { formatField } from '../format'
-import type { Case, Field, Offer } from '../types/contracts'
+import { useLoad } from '../session'
+import type { Field, Offer } from '../types/contracts'
 
 type Kind = Parameters<typeof formatField>[1]
 
@@ -64,13 +66,8 @@ function OfferRow({ offer, onOpen }: { offer: Offer; onOpen: (label: string, fie
 }
 
 export function CaseDetail({ caseId, onBack }: { caseId: string; onBack: () => void }) {
-  const [data, setData] = useState<Case | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [data, error] = useLoad(() => getCase(caseId), [caseId])
   const [selection, setSelection] = useState<EvidenceSelection | null>(null)
-
-  useEffect(() => {
-    getCase(caseId).then(setData, (e: Error) => setError(e.message))
-  }, [caseId])
 
   if (error) return <p className="warning">Could not load {caseId}: {error}</p>
   if (!data) return <p className="muted">Loading {caseId}…</p>
@@ -173,6 +170,8 @@ export function CaseDetail({ caseId, onBack }: { caseId: string; onBack: () => v
           </>
         )}
       </section>
+
+      <SapPanel caseId={data.case_id} />
 
       {selection && <EmailPanel selection={selection} onClose={() => setSelection(null)} />}
     </>

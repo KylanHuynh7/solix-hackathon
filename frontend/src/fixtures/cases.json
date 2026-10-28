@@ -246,7 +246,7 @@
         "source_message_id": "<s3-offer-001@supplier3.example.com>"
       }
     ],
-    "state": "Quoting",
+    "state": "Confirmed",
     "exceptions": [
       "Supplier One Pharma (SUP-001) offer: expiry 2027-10-31 is before the customer minimum 2028-06-30.",
       "Supplier One Pharma (SUP-001) offer: 3 lots (A1001, A1002, A1003) but the customer requires a single lot.",

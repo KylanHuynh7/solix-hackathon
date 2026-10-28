@@ -33,7 +33,7 @@ def main() -> None:
     client = TestClient(app)
     try:
         client.post("/demo/reset")
-        for _ in range(4):  # s1_offer, s2_offer, s3_offer, s1_injection
+        for _ in range(5):  # s1_offer, s2_offer, s3_offer, s1_injection, cust_yes
             client.post("/demo/process-next")
 
         # A third draft, rejected by a human, so the UI has one of each kind.
@@ -75,6 +75,8 @@ def main() -> None:
         write("cases.json", client.get("/cases").json())
         write("drafts.json", drafts)
         write("audit.json", client.get("/audit", params={"case_id": CASE}).json())
+        write("sap_intents.json", client.get("/sap-intents").json())
+        write("outbox.json", client.get("/outbox").json())
         write(
             "emails.json",
             [json.loads(p.read_text()) for p in sorted((SEED / "emails").glob("*.json"))],

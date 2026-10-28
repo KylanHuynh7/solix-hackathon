@@ -1,6 +1,6 @@
 [
   {
-    "draft_id": "DRAFT-3a877504",
+    "draft_id": "DRAFT-31e916e8",
     "case_id": "CASE-001",
     "recipient_role": "supplier",
     "to": [
@@ -14,7 +14,7 @@
     "created_by": "negotiator"
   },
   {
-    "draft_id": "DRAFT-c7f87caa",
+    "draft_id": "DRAFT-e3a060bb",
     "case_id": "CASE-001",
     "recipient_role": "customer",
     "to": [
