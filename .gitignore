@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+!.env.example
+token.json
+credentials.json
+
+# Local data
+*.sqlite
+*.db
+data/ndc_cache.json
+.replay_cache/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store

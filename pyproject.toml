@@ -1,0 +1,25 @@
+[project]
+name = "neurobiz"
+version = "0.1.0"
+description = "Agent layer for pharma procurement emails: extract, validate, draft replies for human approval."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic>=2",
+    "anthropic",
+    "claude-agent-sdk",
+    "httpx",
+    "openpyxl",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

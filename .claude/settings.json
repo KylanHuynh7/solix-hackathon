@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": ["Bash(uv run pytest:*)", "Bash(pytest:*)", "Bash(npm run:*)", "Bash(git status)", "Bash(git diff:*)", "Bash(git log:*)"],
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(**/token.json)", "Read(**/credentials.json)",
+             "Bash(curl:*)", "Bash(wget:*)", "Bash(pip install:*)", "Bash(uv add:*)", "Bash(npm install:*)"]
+  }
+}
