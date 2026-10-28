@@ -114,7 +114,7 @@ export const fixtureBackend = {
   },
 
   demoStatus(): DemoStatus {
-    return { next: null, index: 5, total: 5, order: [] }
+    return { next: null, index: 5, total: 5, order: [], processing: null, last: null }
   },
 
   reset() {
