@@ -37,6 +37,9 @@ class AppState:
         self.ledger = SqliteLedger(_latest(self.data_dir / "ledgers", "ledger"))
         self.sap = SqliteSapMock(_latest(self.data_dir / "sap", "sap"))
         self.demo_index = 0
+        # The one in-flight /demo/process-next job, if any (see backend/api/demo.py).
+        self.demo_job: dict | None = None
+        self.last_job: dict | None = None
 
     def reset(self) -> None:
         with self.lock:
