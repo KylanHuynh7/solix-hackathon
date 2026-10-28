@@ -11,6 +11,7 @@ from typing import Any, Literal
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
+from backend.api.demo_stub import DEMO_ORDER, load_demo_email
 from backend.api.outbound import LEAK_CHECK_IS_STUB, check_outbound
 from backend.api.state import AppState, get_state
 from backend.sap_mock import MissingKeysError
@@ -271,6 +272,20 @@ def approve_sap_intent(
             set_case_state(state, case, CaseState.Ordered, actor, "purchase order created")
 
         return intent.model_dump(mode="json")
+
+
+# --- emails --------------------------------------------------------------------------------
+
+
+@router.get("/emails")
+def list_emails(message_id: str | None = None) -> list[dict[str, Any]]:
+    """The seeded inbox (data/seed/emails), as JSON. Bodies are plain text; clients render text."""
+    emails = [load_demo_email(key) for key in DEMO_ORDER]
+    return [
+        e.model_dump(mode="json")
+        for e in emails
+        if message_id is None or e.message_id == message_id
+    ]
 
 
 # --- outbox and audit ----------------------------------------------------------------------
