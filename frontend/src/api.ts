@@ -2,8 +2,8 @@ import type { AuditEvent, Case, Draft, Email } from './types/contracts'
 import { fixtureDirectory, fixtureEmails } from './fixtures'
 import { fixtureBackend } from './fixtures/backend'
 
-// Default true so every view works offline. Set VITE_USE_FIXTURES=false to use the live API.
-export const USE_FIXTURES = import.meta.env.VITE_USE_FIXTURES !== 'false'
+// Live API by default. Set VITE_USE_FIXTURES=true to work offline on fixture data.
+export const USE_FIXTURES = import.meta.env.VITE_USE_FIXTURES === 'true'
 export const API_BASE = 'http://127.0.0.1:8000'
 
 // GET /drafts?status=rejected adds these; the frozen DraftStatus has no "rejected".
@@ -43,11 +43,22 @@ export interface VerifyResult {
   ledger_file?: string
 }
 
+export interface DemoJob {
+  key: string
+  processor: string
+  message_id: string
+  ok: boolean
+  error?: string
+  seconds?: number
+}
+
 export interface DemoStatus {
   next: string | null
   index: number
   total: number
   order: string[]
+  processing: string | null
+  last: DemoJob | null
 }
 
 export interface Directory {
@@ -189,16 +200,18 @@ export async function demoReset(): Promise<DemoStatus> {
   return post('/demo/reset')
 }
 
-export async function demoProcessNext(): Promise<DemoStatus & { processed: string }> {
+// Starts a background job and returns at once; poll demoStatus() until `processing` is null.
+export async function demoProcessNext(): Promise<{ processing: string; key: string }> {
   if (USE_FIXTURES) throw new ApiError('Processing emails needs the live API.')
   return post('/demo/process-next')
 }
 
 // --- emails and directory ------------------------------------------------------------------
 
-// TODO(K6): the API has no email endpoint yet; seeded emails come from fixtures in both modes.
 export async function getEmail(messageId: string): Promise<Email | undefined> {
-  return fixtureEmails.find((e) => e.message_id === messageId)
+  if (USE_FIXTURES) return fixtureEmails.find((e) => e.message_id === messageId)
+  const found = await get<Email[]>(`/emails${query({ message_id: messageId })}`)
+  return found[0]
 }
 
 // Static synthetic directory (data/seed/directory.json); same in both modes.

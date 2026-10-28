@@ -755,3 +755,14 @@ code {
   font-size: 1.05rem;
   color: var(--ok-fg);
 }
+
+.demo-processing {
+  color: var(--accent);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
