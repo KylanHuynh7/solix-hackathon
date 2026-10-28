@@ -1,0 +1,324 @@
+[
+  {
+    "seq": 1,
+    "ts": "2026-10-28T23:01:07.295419Z",
+    "case_id": "CASE-001",
+    "actor": "system",
+    "action": "demo_reset",
+    "source": "api",
+    "payload": {
+      "ledger_file": "ledger-20261028T230107-09433e.db"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash": "e666ed1334478fdc8a83ce7e9377e5e2a750d5153b1297749b4817714863847b"
+  },
+  {
+    "seq": 2,
+    "ts": "2026-10-28T23:01:07.302457Z",
+    "case_id": "CASE-001",
+    "actor": "system",
+    "action": "email_ingested",
+    "source": "demo_stub",
+    "payload": {
+      "message_id": "<s1-offer-001@supplier1.example.com>",
+      "sender": "alex.rivera@supplier1.example.com",
+      "subject": "Re: RFQ: Semaglutide injection pens - CASE-001"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "e666ed1334478fdc8a83ce7e9377e5e2a750d5153b1297749b4817714863847b",
+    "hash": "968bb8c2ead722972dcaaa3d69a678b680548fa1b38137d31882ad1d194efe3d"
+  },
+  {
+    "seq": 3,
+    "ts": "2026-10-28T23:01:07.303909Z",
+    "case_id": "CASE-001",
+    "actor": "extractor",
+    "action": "fields_extracted",
+    "source": "demo_stub",
+    "payload": {
+      "expiry": "2027-10-31",
+      "lots": [
+        "A1001",
+        "A1002",
+        "A1003"
+      ],
+      "message_id": "<s1-offer-001@supplier1.example.com>",
+      "ndc": "0169-4524-14",
+      "quantity": 1200,
+      "supplier_id": "SUP-001",
+      "unit_price": 285.0,
+      "unit_price_unit": "USD/pen"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "968bb8c2ead722972dcaaa3d69a678b680548fa1b38137d31882ad1d194efe3d",
+    "hash": "3b677ff4a41942bdca7c355344d2e763f3180209c9bddf18d4e68b5f219d74b0"
+  },
+  {
+    "seq": 4,
+    "ts": "2026-10-28T23:01:07.304997Z",
+    "case_id": "CASE-001",
+    "actor": "orchestrator",
+    "action": "check_failed",
+    "source": "demo_stub",
+    "payload": {
+      "check": "min_expiry",
+      "message": "Supplier One Pharma (SUP-001) offer: expiry 2027-10-31 is before the customer minimum 2028-06-30."
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "3b677ff4a41942bdca7c355344d2e763f3180209c9bddf18d4e68b5f219d74b0",
+    "hash": "b685603f432939c2d042c301e92ee2a7eb4f421da05018c614812c753a76b0b2"
+  },
+  {
+    "seq": 5,
+    "ts": "2026-10-28T23:01:07.306072Z",
+    "case_id": "CASE-001",
+    "actor": "orchestrator",
+    "action": "check_failed",
+    "source": "demo_stub",
+    "payload": {
+      "check": "single_lot",
+      "message": "Supplier One Pharma (SUP-001) offer: 3 lots (A1001, A1002, A1003) but the customer requires a single lot."
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "b685603f432939c2d042c301e92ee2a7eb4f421da05018c614812c753a76b0b2",
+    "hash": "d1aab6fa27b51d134e7d5281adcfa327cbb1c776d289ab75e20440ffa0bc595f"
+  },
+  {
+    "seq": 6,
+    "ts": "2026-10-28T23:01:07.307091Z",
+    "case_id": "CASE-001",
+    "actor": "orchestrator",
+    "action": "case_state_changed",
+    "source": "demo_stub",
+    "payload": {
+      "from": "Quoting",
+      "reason": "supplier offer failed checks",
+      "to": "Exception"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "d1aab6fa27b51d134e7d5281adcfa327cbb1c776d289ab75e20440ffa0bc595f",
+    "hash": "6d4ab4f87b082c3a4f78283dcb5abad2f32b6d6c12d6a9acb34980208693c0af"
+  },
+  {
+    "seq": 7,
+    "ts": "2026-10-28T23:01:07.309422Z",
+    "case_id": "CASE-001",
+    "actor": "negotiator",
+    "action": "draft_proposed",
+    "source": "demo_stub",
+    "payload": {
+      "draft_id": "DRAFT-3a877504",
+      "recipient_role": "supplier",
+      "subject": "Re: RFQ: Semaglutide injection pens - CASE-001"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "6d4ab4f87b082c3a4f78283dcb5abad2f32b6d6c12d6a9acb34980208693c0af",
+    "hash": "85c177b8213e8562d07ba3c5c2f725b9adf1d43931208260a558338a249056cd"
+  },
+  {
+    "seq": 8,
+    "ts": "2026-10-28T23:01:07.316083Z",
+    "case_id": "CASE-001",
+    "actor": "system",
+    "action": "email_ingested",
+    "source": "demo_stub",
+    "payload": {
+      "message_id": "<s2-offer-001@supplier2.example.com>",
+      "sender": "jordan.lee@supplier2.example.com",
+      "subject": "Re: RFQ: Semaglutide injection pens - CASE-001"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "85c177b8213e8562d07ba3c5c2f725b9adf1d43931208260a558338a249056cd",
+    "hash": "07013d5f4caa692b295701a5b986ba654770806df2f1f17d0eef894de44c7f87"
+  },
+  {
+    "seq": 9,
+    "ts": "2026-10-28T23:01:07.317451Z",
+    "case_id": "CASE-001",
+    "actor": "extractor",
+    "action": "fields_extracted",
+    "source": "demo_stub",
+    "payload": {
+      "expiry": "2028-03-31",
+      "lots": [
+        "B2200"
+      ],
+      "message_id": "<s2-offer-001@supplier2.example.com>",
+      "ndc": "0169-4303-30",
+      "quantity": 1200,
+      "supplier_id": "SUP-002",
+      "unit_price": 190.0,
+      "unit_price_unit": "USD/tablet"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "07013d5f4caa692b295701a5b986ba654770806df2f1f17d0eef894de44c7f87",
+    "hash": "1f2743fbefa149bded7b4b03f6e21803a7eb515a3532517ae8dff8590280b7c6"
+  },
+  {
+    "seq": 10,
+    "ts": "2026-10-28T23:01:07.318652Z",
+    "case_id": "CASE-001",
+    "actor": "orchestrator",
+    "action": "check_failed",
+    "source": "demo_stub",
+    "payload": {
+      "check": "dosage_form",
+      "message": "Supplier Two BioSupply (SUP-002) offer: NDC 0169-4303-30 is RYBELSUS (tablet, oral) per openFDA; the customer requires an injection pen."
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "1f2743fbefa149bded7b4b03f6e21803a7eb515a3532517ae8dff8590280b7c6",
+    "hash": "bcd1a8a65fa176c5d2e8a314bb1ad661541c31a0c091af9cb19755920021ef07"
+  },
+  {
+    "seq": 11,
+    "ts": "2026-10-28T23:01:07.324574Z",
+    "case_id": "CASE-001",
+    "actor": "system",
+    "action": "email_ingested",
+    "source": "demo_stub",
+    "payload": {
+      "message_id": "<s3-offer-001@supplier3.example.com>",
+      "sender": "morgan.chen@supplier3.example.com",
+      "subject": "Re: RFQ: Semaglutide injection pens - CASE-001"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "bcd1a8a65fa176c5d2e8a314bb1ad661541c31a0c091af9cb19755920021ef07",
+    "hash": "98f14d05f7e4b3b8821c678cb1394f8b257556bf699d787823981935237d38e2"
+  },
+  {
+    "seq": 12,
+    "ts": "2026-10-28T23:01:07.325936Z",
+    "case_id": "CASE-001",
+    "actor": "extractor",
+    "action": "fields_extracted",
+    "source": "demo_stub",
+    "payload": {
+      "expiry": "2028-11-30",
+      "lots": [
+        "C3300"
+      ],
+      "message_id": "<s3-offer-001@supplier3.example.com>",
+      "ndc": "0169-4524-14",
+      "quantity": 1200,
+      "supplier_id": "SUP-003",
+      "unit_price": 310.0,
+      "unit_price_unit": "USD/pen"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "98f14d05f7e4b3b8821c678cb1394f8b257556bf699d787823981935237d38e2",
+    "hash": "c8cdddcc66efc86c6bd5673588aa56fecb405ad1d5cec630a4f7f308eb82302c"
+  },
+  {
+    "seq": 13,
+    "ts": "2026-10-28T23:01:07.327048Z",
+    "case_id": "CASE-001",
+    "actor": "orchestrator",
+    "action": "case_state_changed",
+    "source": "demo_stub",
+    "payload": {
+      "from": "Exception",
+      "reason": "compliant offer received",
+      "to": "Quoting"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "c8cdddcc66efc86c6bd5673588aa56fecb405ad1d5cec630a4f7f308eb82302c",
+    "hash": "dfa94563b0e65d67ab352ed8b33583cc7e8987018132b168f7a465c8782541b8"
+  },
+  {
+    "seq": 14,
+    "ts": "2026-10-28T23:01:07.329205Z",
+    "case_id": "CASE-001",
+    "actor": "confirmer",
+    "action": "draft_proposed",
+    "source": "demo_stub",
+    "payload": {
+      "draft_id": "DRAFT-c7f87caa",
+      "recipient_role": "customer",
+      "subject": "Confirmation needed: Semaglutide pens for clinical trial - CASE-001"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "dfa94563b0e65d67ab352ed8b33583cc7e8987018132b168f7a465c8782541b8",
+    "hash": "b97b9272b3c5bf04de718bfd089dcbf4f3dcc602d1fa4a39b730e2502e15308f"
+  },
+  {
+    "seq": 15,
+    "ts": "2026-10-28T23:01:07.335101Z",
+    "case_id": "CASE-001",
+    "actor": "system",
+    "action": "email_ingested",
+    "source": "demo_stub",
+    "payload": {
+      "message_id": "<s1-followup-002@supplier1.example.com>",
+      "sender": "alex.rivera@supplier1.example.com",
+      "subject": "Re: RFQ: Semaglutide injection pens - CASE-001"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "b97b9272b3c5bf04de718bfd089dcbf4f3dcc602d1fa4a39b730e2502e15308f",
+    "hash": "1227fb4d8fae5534fab59980b539f21fcdde5ba05e6f7684ae12646fa82997b5"
+  },
+  {
+    "seq": 16,
+    "ts": "2026-10-28T23:01:07.336146Z",
+    "case_id": "CASE-001",
+    "actor": "orchestrator",
+    "action": "tool_denied",
+    "source": "demo_stub",
+    "payload": {
+      "message_id": "<s1-followup-002@supplier1.example.com>",
+      "reason": "agents cannot approve; the request came from email text (untrusted data), not from a human approver",
+      "tool": "approve_purchase_order"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "1227fb4d8fae5534fab59980b539f21fcdde5ba05e6f7684ae12646fa82997b5",
+    "hash": "829672af835afbffaba15eba7ec7732452c3bc65fdad2d19370fc0a7b0c91aa6"
+  },
+  {
+    "seq": 17,
+    "ts": "2026-10-28T23:01:07.340508Z",
+    "case_id": "CASE-001",
+    "actor": "negotiator",
+    "action": "draft_proposed",
+    "source": "fixture",
+    "payload": {
+      "draft_id": "DRAFT-fixture-rejected",
+      "recipient_role": "supplier"
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "829672af835afbffaba15eba7ec7732452c3bc65fdad2d19370fc0a7b0c91aa6",
+    "hash": "eef8c96aa085706cc02ebc369669912d756136d642fb1c19446d1b5d1fdb6c11"
+  },
+  {
+    "seq": 18,
+    "ts": "2026-10-28T23:01:07.345084Z",
+    "case_id": "CASE-001",
+    "actor": "human:Jamie Park",
+    "action": "draft_rejected",
+    "source": "api",
+    "payload": {
+      "draft_id": "DRAFT-fixture-rejected",
+      "reason": "Supplier Two only has tablets; drop them from this case instead."
+    },
+    "model": null,
+    "prompt_version": null,
+    "prev_hash": "eef8c96aa085706cc02ebc369669912d756136d642fb1c19446d1b5d1fdb6c11",
+    "hash": "878eb03958614885e30bfe53544e029890e3b0ae5ef0d9836a92d09c07e864d9"
+  }
+]

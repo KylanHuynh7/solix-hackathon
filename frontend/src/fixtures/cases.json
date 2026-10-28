@@ -1,0 +1,257 @@
+[
+  {
+    "case_id": "CASE-001",
+    "line_item": {
+      "requested_ndc": "0169-4524-14",
+      "product": "Semaglutide injection",
+      "dosage_form": "injection pen",
+      "quantity": 1200,
+      "unit": "pen"
+    },
+    "requirement": {
+      "customer_id": "CUST-001",
+      "min_expiry": "2028-06-30",
+      "single_lot": true,
+      "dosage_form": "injection pen",
+      "storage_range": "2-8C"
+    },
+    "offers": [
+      {
+        "supplier_id": "SUP-001",
+        "round": 1,
+        "ndc": {
+          "value": "0169-4524-14",
+          "unit": null,
+          "raw": "NDC 0169-4524-14",
+          "evidence": "NDC 0169-4524-14",
+          "status": "verified",
+          "reason": null
+        },
+        "product": {
+          "value": null,
+          "unit": null,
+          "raw": null,
+          "evidence": null,
+          "status": "needs_review",
+          "reason": "not stated in email"
+        },
+        "quantity": {
+          "value": 1200,
+          "unit": "pen",
+          "raw": "1,200 pens",
+          "evidence": "1,200 pens",
+          "status": "verified",
+          "reason": "total quantity explicitly stated and matches the sum of the three lot quantities (500+400+300)"
+        },
+        "lots": [
+          {
+            "value": "A1001",
+            "unit": null,
+            "raw": "Lot A1001: 500 pens",
+            "evidence": "Lot A1001: 500 pens",
+            "status": "verified",
+            "reason": "lot explicitly stated with its quantity in the offer"
+          },
+          {
+            "value": "A1002",
+            "unit": null,
+            "raw": "Lot A1002: 400 pens",
+            "evidence": "Lot A1002: 400 pens",
+            "status": "verified",
+            "reason": "lot explicitly stated with its quantity in the offer"
+          },
+          {
+            "value": "A1003",
+            "unit": null,
+            "raw": "Lot A1003: 300 pens",
+            "evidence": "Lot A1003: 300 pens",
+            "status": "verified",
+            "reason": "lot explicitly stated with its quantity in the offer"
+          }
+        ],
+        "expiry": {
+          "value": "2027-10-31",
+          "unit": null,
+          "raw": "10/27",
+          "evidence": "10/27",
+          "status": "verified",
+          "reason": null
+        },
+        "unit_price": {
+          "value": 285.0,
+          "unit": "USD/pen",
+          "raw": "USD 285.00 per pen",
+          "evidence": "USD 285.00 per pen",
+          "status": "verified",
+          "reason": null
+        },
+        "lead_time_days": {
+          "value": null,
+          "unit": null,
+          "raw": null,
+          "evidence": null,
+          "status": "needs_review",
+          "reason": "not stated in email"
+        },
+        "storage": {
+          "value": null,
+          "unit": null,
+          "raw": null,
+          "evidence": null,
+          "status": "needs_review",
+          "reason": "not stated in email"
+        },
+        "source_message_id": "<s1-offer-001@supplier1.example.com>"
+      },
+      {
+        "supplier_id": "SUP-002",
+        "round": 1,
+        "ndc": {
+          "value": "0169-4303-30",
+          "unit": null,
+          "raw": "NDC 0169-4303-30",
+          "evidence": "NDC 0169-4303-30",
+          "status": "verified",
+          "reason": null
+        },
+        "product": {
+          "value": "semaglutide tablets",
+          "unit": null,
+          "raw": "semaglutide tablets",
+          "evidence": "semaglutide tablets",
+          "status": "verified",
+          "reason": null
+        },
+        "quantity": {
+          "value": 1200,
+          "unit": "tablet",
+          "raw": "1,200 tablets",
+          "evidence": "1,200 tablets",
+          "status": "verified",
+          "reason": "quantity explicitly stated; note this offer is tablets, not the requested injection pen dosage form, which is a mismatch to flag separately from the regulated fields"
+        },
+        "lots": [
+          {
+            "value": "B2200",
+            "unit": null,
+            "raw": "Lot B2200",
+            "evidence": "Lot B2200",
+            "status": "verified",
+            "reason": "single lot explicitly stated in the offer"
+          }
+        ],
+        "expiry": {
+          "value": "2028-03-31",
+          "unit": null,
+          "raw": "03/2028",
+          "evidence": "03/2028",
+          "status": "verified",
+          "reason": "unambiguous month/year format; normalized to the last day of the stated month"
+        },
+        "unit_price": {
+          "value": 190.0,
+          "unit": "USD/tablet",
+          "raw": "USD 190.00 per tablet",
+          "evidence": "USD 190.00 per tablet",
+          "status": "verified",
+          "reason": null
+        },
+        "lead_time_days": {
+          "value": 10,
+          "unit": "business_day",
+          "raw": "10 business days",
+          "evidence": "10 business days",
+          "status": "needs_review",
+          "reason": "stated in business days, not calendar days"
+        },
+        "storage": {
+          "value": null,
+          "unit": null,
+          "raw": null,
+          "evidence": null,
+          "status": "needs_review",
+          "reason": "not stated in email"
+        },
+        "source_message_id": "<s2-offer-001@supplier2.example.com>"
+      },
+      {
+        "supplier_id": "SUP-003",
+        "round": 1,
+        "ndc": {
+          "value": "0169-4524-14",
+          "unit": null,
+          "raw": "NDC 0169-4524-14",
+          "evidence": "NDC 0169-4524-14",
+          "status": "verified",
+          "reason": null
+        },
+        "product": {
+          "value": null,
+          "unit": null,
+          "raw": null,
+          "evidence": null,
+          "status": "needs_review",
+          "reason": "not stated in email"
+        },
+        "quantity": {
+          "value": 1200,
+          "unit": "pen",
+          "raw": "1,200 pens",
+          "evidence": "1,200 pens",
+          "status": "verified",
+          "reason": "quantity explicitly stated and matches the requested quantity"
+        },
+        "lots": [
+          {
+            "value": "C3300",
+            "unit": null,
+            "raw": "Lot C3300",
+            "evidence": "Lot C3300",
+            "status": "verified",
+            "reason": "single lot explicitly stated, satisfying the customer's single-lot requirement"
+          }
+        ],
+        "expiry": {
+          "value": "2028-11-30",
+          "unit": null,
+          "raw": "11/2028",
+          "evidence": "11/2028",
+          "status": "verified",
+          "reason": "unambiguous month/year format; normalized to the last day of the stated month"
+        },
+        "unit_price": {
+          "value": 310.0,
+          "unit": "USD/pen",
+          "raw": "USD 310.00 per pen",
+          "evidence": "USD 310.00 per pen",
+          "status": "verified",
+          "reason": null
+        },
+        "lead_time_days": {
+          "value": 7,
+          "unit": "business_day",
+          "raw": "7 business days",
+          "evidence": "7 business days",
+          "status": "needs_review",
+          "reason": "stated in business days, not calendar days"
+        },
+        "storage": {
+          "value": "2-8C",
+          "unit": null,
+          "raw": "Storage maintained at 2-8C",
+          "evidence": "Storage maintained at 2-8C",
+          "status": "verified",
+          "reason": null
+        },
+        "source_message_id": "<s3-offer-001@supplier3.example.com>"
+      }
+    ],
+    "state": "Quoting",
+    "exceptions": [
+      "Supplier One Pharma (SUP-001) offer: expiry 2027-10-31 is before the customer minimum 2028-06-30.",
+      "Supplier One Pharma (SUP-001) offer: 3 lots (A1001, A1002, A1003) but the customer requires a single lot.",
+      "Supplier Two BioSupply (SUP-002) offer: NDC 0169-4303-30 is RYBELSUS (tablet, oral) per openFDA; the customer requires an injection pen.",
+      "Supplier One Pharma (SUP-001) email asked the system to approve the PO. Ignored: only a human can approve."
+    ]
+  }
+]

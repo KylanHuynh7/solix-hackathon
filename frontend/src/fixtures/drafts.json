@@ -1,0 +1,46 @@
+[
+  {
+    "draft_id": "DRAFT-3a877504",
+    "case_id": "CASE-001",
+    "recipient_role": "supplier",
+    "to": [
+      "alex.rivera@supplier1.example.com"
+    ],
+    "cc": [],
+    "subject": "Re: RFQ: Semaglutide injection pens - CASE-001",
+    "body": "Hi Alex,\n\nThank you for the offer. Before we can proceed, two points need to change:\n\n1. Expiry: 10/27 (2027-10-31) is earlier than the minimum we can accept, 2028-06-30.\n2. Lots: we need all 1,200 pens from a single lot; the offer splits them across 3 lots (A1001, A1002, A1003).\n\nCould you offer 1,200 pens from a single lot with expiry on or after 2028-06-30, and confirm the price per pen and lead time?\n\nBest regards,\nJamie Park\nNeuroBiz",
+    "status": "proposed",
+    "approver": null,
+    "created_by": "negotiator"
+  },
+  {
+    "draft_id": "DRAFT-c7f87caa",
+    "case_id": "CASE-001",
+    "recipient_role": "customer",
+    "to": [
+      "taylor.brooks@customer1.example.com"
+    ],
+    "cc": [],
+    "subject": "Confirmation needed: Semaglutide pens for clinical trial - CASE-001",
+    "body": "Hi Taylor,\n\nWe have a compliant offer for your clinical trial supply:\n\n- Supplier: Supplier Three Distribution\n- Product: Semaglutide injection (NDC 0169-4524-14)\n- Quantity: 1,200 pens, single lot C3300\n- Expiry: 11/2028 (2028-11-30), meets your minimum of 2028-06-30\n- Storage: 2-8C throughout transit\n- Lead time: 7 business days\n\nPlease confirm you would like us to proceed.\n\nBest regards,\nJamie Park\nNeuroBiz",
+    "status": "proposed",
+    "approver": null,
+    "created_by": "confirmer"
+  },
+  {
+    "draft_id": "DRAFT-fixture-rejected",
+    "case_id": "CASE-001",
+    "recipient_role": "supplier",
+    "to": [
+      "jordan.lee@supplier2.example.com"
+    ],
+    "cc": [],
+    "subject": "Re: RFQ: Semaglutide injection pens - CASE-001",
+    "body": "Hi Jordan,\n\nThanks for the offer. We need injection pens, not tablets. Do you have NDC 0169-4524-14 available?\n\nBest regards,\nJamie Park\nNeuroBiz",
+    "status": "rejected",
+    "approver": null,
+    "created_by": "negotiator",
+    "rejected_by": "Jamie Park",
+    "reason": "Supplier Two only has tablets; drop them from this case instead."
+  }
+]

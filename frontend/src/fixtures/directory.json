@@ -1,0 +1,42 @@
+{
+  "suppliers": [
+    {
+      "supplier_id": "SUP-001",
+      "name": "Supplier One Pharma",
+      "contacts": [
+        {"name": "Alex Rivera", "email": "alex.rivera@supplier1.example.com"}
+      ]
+    },
+    {
+      "supplier_id": "SUP-002",
+      "name": "Supplier Two BioSupply",
+      "contacts": [
+        {"name": "Jordan Lee", "email": "jordan.lee@supplier2.example.com"}
+      ]
+    },
+    {
+      "supplier_id": "SUP-003",
+      "name": "Supplier Three Distribution",
+      "contacts": [
+        {"name": "Morgan Chen", "email": "morgan.chen@supplier3.example.com"}
+      ]
+    }
+  ],
+  "customers": [
+    {
+      "customer_id": "CUST-001",
+      "name": "Buyer One Health System",
+      "contacts": [
+        {"name": "Taylor Brooks", "email": "taylor.brooks@customer1.example.com"}
+      ],
+      "account_manager": {"name": "Jamie Park", "email": "jamie.park@neurobiz.example.com"}
+    }
+  ],
+  "email_to_id": {
+    "alex.rivera@supplier1.example.com": "SUP-001",
+    "jordan.lee@supplier2.example.com": "SUP-002",
+    "morgan.chen@supplier3.example.com": "SUP-003",
+    "taylor.brooks@customer1.example.com": "CUST-001",
+    "jamie.park@neurobiz.example.com": "INTERNAL"
+  }
+}
