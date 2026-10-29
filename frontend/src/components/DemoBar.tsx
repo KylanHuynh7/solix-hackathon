@@ -40,7 +40,7 @@ export function DemoBar() {
           const last = s.last
           setMessage(
             last?.ok
-              ? `Processed: ${label(last.key)} (${last.seconds}s)`
+              ? `Processed: ${label(last.key)}${last.seconds && last.seconds >= 1 ? ` (${last.seconds}s)` : ''}`
               : `Failed: ${last ? label(last.key) : ''} — ${last?.error ?? 'unknown error'}`,
           )
           refresh()
@@ -64,6 +64,8 @@ export function DemoBar() {
       if (kind === 'next') {
         await demoProcessNext()
         setElapsed(0)
+        // A replayed job can finish before the first poll; still report it and refresh views.
+        wasProcessing.current = true
       } else {
         await demoReset()
         setMessage('Demo reset: fresh case and a new ledger file.')
