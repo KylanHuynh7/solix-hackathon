@@ -141,7 +141,7 @@ class Toolbox:
                 "dosage_form": req.dosage_form,
                 "storage_range": req.storage_range,
             },
-            "sign_as": {"name": manager.get("name"), "company": "NeuroBiz"},
+            "sign_as": {"name": manager.get("name"), "company": "TransPharmic"},
             "recipient_role": self.recipient_role,
         }
         if self.offer is not None:
