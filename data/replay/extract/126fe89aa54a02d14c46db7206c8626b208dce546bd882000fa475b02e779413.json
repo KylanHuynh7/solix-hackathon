@@ -1,0 +1,21 @@
+{
+  "component": "extract",
+  "model": "claude-sonnet-5-5",
+  "output": {
+    "error": null,
+    "spans": {
+      "expiry_raw": "03/2028",
+      "is_offer": true,
+      "lead_time_raw": "10 business days",
+      "lots": [
+        "Lot B2200"
+      ],
+      "ndc_raw": "0169-4303-30",
+      "product_raw": "semaglutide tablets",
+      "quantity_raw": "1,200 tablets",
+      "storage_raw": null,
+      "unit_price_raw": "USD 190.00 per tablet"
+    }
+  },
+  "prompt_version": "extract-v2"
+}

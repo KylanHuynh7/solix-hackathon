@@ -15,6 +15,7 @@ from backend.extract.parsers import (
     parse_price,
     parse_quantity,
 )
+from backend.replay.extract import ReplaySpanLLM
 
 _SEED = Path(__file__).resolve().parents[2] / "data" / "seed"
 
@@ -85,7 +86,7 @@ def _known_ndcs() -> set[str]:
 
 def extract_offer(email: Email, case: Case, *, llm: SpanLLM | None = None) -> Offer:
     if llm is None:
-        llm = llm_module.AnthropicSpanLLM()
+        llm = ReplaySpanLLM()
     cleaned = clean_email(email.body)
     spans = llm.find_spans(cleaned.new_text, case)
     last_run_meta.update(
