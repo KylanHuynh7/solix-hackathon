@@ -36,7 +36,7 @@ function exportCsv(events: AuditEvent[]) {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `neurobiz-audit-${new Date().toISOString().slice(0, 19).replace(/:/g, '')}.csv`
+  a.download = `transpharmic-audit-${new Date().toISOString().slice(0, 19).replace(/:/g, '')}.csv`
   a.click()
   URL.revokeObjectURL(url)
 }

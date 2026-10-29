@@ -66,7 +66,7 @@ export default function App() {
       <div className="app">
         <header className="topbar">
           <button className="brand" onClick={() => navigate('/')}>
-            NeuroBiz
+            TransPharmic
           </button>
           <Nav path={path} navigate={navigate} />
           <span className="tagline">
