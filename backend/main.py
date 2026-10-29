@@ -8,10 +8,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.api.demo import router as demo_router
 from backend.api.routes import router as api_router
+from backend.archive.router import router as archive_router
 
 app = FastAPI(title="TransPharmic")
 app.include_router(api_router)
 app.include_router(demo_router)
+app.include_router(archive_router)
 # The /sap mock router is deliberately not mounted: its POSTs would bypass the human approval
 # gate. SAP documents are created only via POST /sap-intents/{id}/approve.
 
