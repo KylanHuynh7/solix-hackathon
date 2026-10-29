@@ -766,3 +766,21 @@ code {
     opacity: 0.55;
   }
 }
+
+/* Solix export */
+.solix {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.solix p {
+  margin: 0.25rem 0 0;
+  max-width: 900px;
+}
+
+.solix-ok {
+  font-weight: 700;
+  color: var(--ok-fg);
+}

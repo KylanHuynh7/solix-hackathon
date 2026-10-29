@@ -186,6 +186,24 @@ export async function verifyAudit(): Promise<VerifyResult> {
   return USE_FIXTURES ? fixture(fixtureBackend.verify) : get('/audit/verify')
 }
 
+// --- Solix archive export ------------------------------------------------------------------
+
+// Only the parts the UI reads; the full bundle is downloaded as-is.
+export interface SolixBundle {
+  source_system: string
+  target: string
+  generated_at: string
+  ledger: { events: unknown[]; verify: VerifyResult; head_hash: string | null }
+  sap_documents: { document_number: string | null }[]
+  integrity: { bundle_sha256: string }
+  [key: string]: unknown
+}
+
+export async function getSolixBundle(caseId: string): Promise<SolixBundle> {
+  if (USE_FIXTURES) throw new ApiError('The Solix export needs the live API.')
+  return get(`/cases/${encodeURIComponent(caseId)}/solix-bundle`)
+}
+
 // --- demo controls -------------------------------------------------------------------------
 
 export async function demoStatus(): Promise<DemoStatus> {

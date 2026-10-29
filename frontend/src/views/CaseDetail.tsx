@@ -3,6 +3,7 @@ import { customerName, getCase, supplierName } from '../api'
 import { FieldStatusBadge, StateBadge } from '../components/Badges'
 import { EmailPanel, type EvidenceSelection } from '../components/EmailPanel'
 import { SapPanel } from '../components/SapPanel'
+import { SolixExport } from '../components/SolixExport'
 import { formatField } from '../format'
 import { useLoad } from '../session'
 import type { Field, Offer } from '../types/contracts'
@@ -172,6 +173,8 @@ export function CaseDetail({ caseId, onBack }: { caseId: string; onBack: () => v
       </section>
 
       <SapPanel caseId={data.case_id} />
+
+      <SolixExport caseId={data.case_id} closed={data.state === 'Ordered'} />
 
       {selection && <EmailPanel selection={selection} onClose={() => setSelection(null)} />}
     </>
