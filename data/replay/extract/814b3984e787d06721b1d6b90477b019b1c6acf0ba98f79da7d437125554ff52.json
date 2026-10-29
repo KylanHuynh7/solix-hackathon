@@ -1,0 +1,23 @@
+{
+  "component": "extract",
+  "model": "claude-sonnet-5-5",
+  "output": {
+    "error": null,
+    "spans": {
+      "expiry_raw": "10/27",
+      "is_offer": true,
+      "lead_time_raw": null,
+      "lots": [
+        "Lot A1001: 500 pens",
+        "Lot A1002: 400 pens",
+        "Lot A1003: 300 pens"
+      ],
+      "ndc_raw": "0169-4524-14",
+      "product_raw": null,
+      "quantity_raw": "1,200 pens",
+      "storage_raw": null,
+      "unit_price_raw": "USD 285.00 per pen"
+    }
+  },
+  "prompt_version": "extract-v2"
+}

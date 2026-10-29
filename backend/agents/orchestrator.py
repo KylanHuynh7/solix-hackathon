@@ -19,6 +19,8 @@ from backend.extract import pipeline
 from backend.extract.parsers import clean_email
 from backend.extract.pipeline import extract_offer
 from backend.ledger import Ledger
+from backend.replay import ReplayMiss, tag_ledger
+from backend.replay.agents import ReplayRunner
 from backend.store import SEED_DIR, CaseStore, SapIntent
 from backend.validate.checks import (
     CheckResult,
@@ -162,7 +164,8 @@ async def process_email(
     ledger: Ledger,
     runner: Runner | None = None,
 ) -> dict[str, Any]:
-    runner = runner or sdk_runner
+    runner = runner or ReplayRunner(sdk_runner)
+    ledger = tag_ledger(ledger)  # source "replay" or "live" on every event
     directory = _load_directory()
     case = store.get_case(case_id)
     model = _model()
@@ -206,9 +209,11 @@ async def process_email(
             hook=make_pre_tool_use(ledger, case_id, frozenset({agent})),
             model=model,
         )
-        error = None
+        error, check = None, "agent_failed"
         try:
             await asyncio.wait_for(runner(run), timeout=AGENT_TIMEOUT_S)
+        except ReplayMiss as exc:
+            error, check = str(exc), "replay_miss"
         except asyncio.TimeoutError:
             error = f"timed out after {AGENT_TIMEOUT_S}s"
         except Exception as exc:  # never crash the pipeline on an agent failure
@@ -218,7 +223,7 @@ async def process_email(
         if error is not None:
             event(
                 "orchestrator", "check_failed",
-                {"check": "agent_failed", "agent": agent, "error": error},
+                {"check": check, "agent": agent, "error": error},
                 model=model, prompt_version=PROMPT_VERSION,
             )
             return
@@ -254,7 +259,13 @@ async def process_email(
         )
 
     elif kind == triage.SUPPLIER_OFFER:
-        offer = extract_offer(email, case)
+        try:
+            offer = extract_offer(email, case)
+        except ReplayMiss as exc:
+            event("extractor", "check_failed", {"check": "replay_miss", "error": str(exc)})
+            flag(f"{_who(directory, sender)} email could not be extracted ({exc}); needs human review.")
+            store.save_case(case)
+            return {"drafts": drafts, "log": log, "exceptions": exceptions}
         case.offers.append(offer)
         store.save_case(case)
         meta = pipeline.last_run_meta
