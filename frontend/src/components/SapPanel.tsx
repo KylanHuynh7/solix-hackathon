@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { approveSapIntent, listSapIntents, type SapIntent } from '../api'
 import { useApprover, useLoad, useRefresh } from '../session'
+import { Icon } from './Icon'
 
 const LABEL: Record<SapIntent['doc_type'], string> = {
   rfq: 'Request for quotation',
@@ -42,16 +43,19 @@ function IntentRow({ intent }: { intent: SapIntent }) {
   }
 
   return (
-    <li className="intent">
-      <div>
+    <li className={`intent ${intent.status === 'executed' ? 'intent-executed' : ''}`}>
+      <span className="intent-icon">
+        <Icon name={intent.status === 'executed' ? 'check' : 'doc'} />
+      </span>
+      <div className="intent-main">
         <strong>{LABEL[intent.doc_type]}</strong>
-        <div className="muted">{summary(intent.payload)}</div>
-        {error && <div className="warning">{error}</div>}
+        <div className="muted small">{summary(intent.payload)}</div>
+        {error && <div className="notice notice-danger">{error}</div>}
       </div>
       {intent.status === 'executed' ? (
         <div className="intent-done">
           <span className="doc-number mono">{intent.document_number}</span>
-          <span className="muted">approved by {intent.approver}</span>
+          <span className="muted small">Approved by {intent.approver}</span>
         </div>
       ) : (
         <button className="button-primary" onClick={approve} disabled={busy}>
@@ -65,14 +69,23 @@ function IntentRow({ intent }: { intent: SapIntent }) {
 export function SapPanel({ caseId }: { caseId: string }) {
   const [intents, error] = useLoad(() => listSapIntents(caseId), [caseId])
 
-  if (error) return <p className="warning">Could not load SAP actions: {error}</p>
+  if (error) return <p className="notice notice-danger">Could not load SAP actions: {error}</p>
   if (!intents || intents.length === 0) return null
 
+  const pending = intents.filter((i) => i.status !== 'executed').length
+
   return (
-    <section className="card">
-      <h2>SAP documents</h2>
-      <p className="muted hint">
-        Proposed by the agents; nothing is written to SAP until a human approves. (SAP is mocked.)
+    <section className="panel">
+      <header className="panel-head">
+        <h2>
+          <Icon name="database" />
+          SAP documents{' '}
+          <span className="count">{pending > 0 ? `${pending} to approve` : 'all created'}</span>
+        </h2>
+        <span className="badge badge-neutral">SAP mock</span>
+      </header>
+      <p className="panel-note muted small">
+        Proposed by the agents. Nothing is written to SAP until a human approves it.
       </p>
       <ul className="intents">
         {intents.map((intent) => (

@@ -9,6 +9,7 @@ import {
   type ApiDraft,
   type OutboxEmail,
 } from '../api'
+import { Icon } from '../components/Icon'
 import { useApprover, useLoad, useRefresh } from '../session'
 import type { Case } from '../types/contracts'
 
@@ -59,15 +60,16 @@ function DraftCard({ draft, cases }: { draft: ApiDraft; cases: Case[] }) {
   }
 
   return (
-    <article className={`card draft ${sent ? 'draft-sent' : ''}`}>
+    <article className={`panel draft ${sent ? 'draft-sent' : ''}`}>
       <header className="draft-header">
         <div>
-          <span className={`badge ${draft.recipient_role === 'customer' ? 'badge-info' : 'badge-neutral'}`}>
+          <span className={`badge ${draft.recipient_role === 'customer' ? 'badge-info' : 'badge-violet'}`}>
+            <Icon name="mail" size={13} />
             To {draft.recipient_role}
           </span>
-          <span className="muted"> proposed by </span>
-          <strong>{draft.created_by}</strong>
-          <span className="muted"> · {draft.case_id}</span>
+          <span className="muted">Drafted by</span>
+          <strong className="agent-name">{draft.created_by}</strong>
+          <span className="muted">· {draft.case_id}</span>
         </div>
         <span className="muted mono">{draft.draft_id}</span>
       </header>
@@ -88,7 +90,10 @@ function DraftCard({ draft, cases }: { draft: ApiDraft; cases: Case[] }) {
       </dl>
 
       <div className={`reasons ${reasons.length ? 'reasons-fail' : 'reasons-ok'}`}>
-        <div className="eyebrow">Why this draft</div>
+        <div className="reasons-title">
+          <Icon name={reasons.length ? 'alert' : 'check'} size={15} />
+          Why this draft
+        </div>
         {reasons.length ? (
           <ul>
             {reasons.map((r, i) => (
@@ -112,10 +117,10 @@ function DraftCard({ draft, cases }: { draft: ApiDraft; cases: Case[] }) {
         rows={Math.min(16, body.split('\n').length + 1)}
       />
 
-      {error && <p className="warning">{error}</p>}
+      {error && <p className="notice notice-danger">{error}</p>}
 
       {sent ? (
-        <p className="sent-note">✓ Sent via simulator. Recorded in the audit ledger.</p>
+        <p className="sent-note"><Icon name="check" size={16} /> Sent via the simulator and recorded in the audit ledger.</p>
       ) : rejecting ? (
         <div className="reject-row">
           <input
@@ -138,6 +143,7 @@ function DraftCard({ draft, cases }: { draft: ApiDraft; cases: Case[] }) {
             Reject…
           </button>
           <button className="button-primary" onClick={approve} disabled={busy}>
+            <Icon name="check" size={15} />
             {busy ? 'Sending…' : 'Approve & send'}
           </button>
         </div>
@@ -147,15 +153,15 @@ function DraftCard({ draft, cases }: { draft: ApiDraft; cases: Case[] }) {
 }
 
 function SentList({ outbox }: { outbox: OutboxEmail[] }) {
-  if (outbox.length === 0) return <p className="muted card">Nothing sent yet.</p>
+  if (outbox.length === 0) return <p className="panel empty">Nothing sent yet. Approved drafts appear here.</p>
   return (
     <>
       {[...outbox].reverse().map((email) => (
-        <article key={email.draft_id} className="card draft">
+        <article key={email.draft_id} className="panel draft">
           <header className="draft-header">
             <div>
-              <span className="badge badge-ok">Sent via {email.via}</span>
-              <span className="muted"> approved by </span>
+              <span className="badge badge-ok"><Icon name="check" size={13} />Sent via {email.via}</span>
+              <span className="muted">Approved by</span>
               <strong>{email.approver}</strong>
             </div>
             <span className="muted">{new Date(email.sent_at).toLocaleString('en-US')}</span>
@@ -176,15 +182,15 @@ function SentList({ outbox }: { outbox: OutboxEmail[] }) {
 }
 
 function RejectedList({ drafts }: { drafts: ApiDraft[] }) {
-  if (drafts.length === 0) return <p className="muted card">No rejected drafts.</p>
+  if (drafts.length === 0) return <p className="panel empty">No rejected drafts.</p>
   return (
     <>
       {drafts.map((d) => (
-        <article key={d.draft_id} className="card draft">
+        <article key={d.draft_id} className="panel draft">
           <header className="draft-header">
             <div>
               <span className="badge badge-danger">Rejected</span>
-              <span className="muted"> by </span>
+              <span className="muted">by</span>
               <strong>{d.rejected_by}</strong>
               <span className="muted"> · proposed by {d.created_by}</span>
             </div>
@@ -214,7 +220,7 @@ export function ReviewQueue() {
   const { approver, clearApprover } = useApprover()
   const [data, error] = useLoad(() => Promise.all([listDrafts(), listOutbox(), listCases()]))
 
-  if (error) return <p className="warning">Could not load drafts: {error}</p>
+  if (error) return <p className="notice notice-danger">Could not load drafts: {error}</p>
   if (!data) return <p className="muted">Loading drafts…</p>
 
   const [drafts, outbox, cases] = data
@@ -223,7 +229,7 @@ export function ReviewQueue() {
 
   return (
     <>
-      <div className="title-row">
+      <div className="toolbar">
         <div className="tabs" role="tablist">
           {(
             [
@@ -244,7 +250,7 @@ export function ReviewQueue() {
           ))}
         </div>
         {approver && (
-          <span className="muted">
+          <span className="muted approver-note">
             Approving as <strong>{approver}</strong>{' '}
             <button className="link" onClick={clearApprover}>
               change
@@ -255,7 +261,7 @@ export function ReviewQueue() {
 
       {tab === 'queue' &&
         (proposed.length === 0 ? (
-          <p className="muted card">No drafts waiting for approval.</p>
+          <p className="panel empty">No drafts waiting for approval. Process the next email to have the agents draft one.</p>
         ) : (
           proposed.map((d) => <DraftCard key={d.draft_id} draft={d} cases={cases} />)
         ))}

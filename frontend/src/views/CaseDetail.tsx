@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { customerName, getCase, supplierName } from '../api'
 import { FieldStatusBadge, StateBadge } from '../components/Badges'
 import { EmailPanel, type EvidenceSelection } from '../components/EmailPanel'
+import { Icon } from '../components/Icon'
 import { SapPanel } from '../components/SapPanel'
 import { SolixExport } from '../components/SolixExport'
 import { formatField } from '../format'
@@ -14,11 +15,13 @@ function FieldCell({
   field,
   label,
   kind,
+  mono,
   onOpen,
 }: {
   field: Field
   label: string
   kind?: Kind
+  mono?: boolean
   onOpen: (label: string, field: Field) => void
 }) {
   return (
@@ -26,38 +29,59 @@ function FieldCell({
       className={`field-cell ${field.status === 'verified' ? '' : 'field-review'}`}
       onClick={() => onOpen(label, field)}
       data-reason={field.reason ?? undefined}
-      title={field.reason ?? undefined}
+      title={field.reason ?? `Show the email sentence for ${label}`}
     >
-      <span className="field-value">{formatField(field, kind)}</span>
+      <span className={`field-value ${mono ? 'mono' : ''}`}>{formatField(field, kind)}</span>
       <FieldStatusBadge field={field} />
     </button>
   )
 }
 
-function OfferRow({ offer, onOpen }: { offer: Offer; onOpen: (label: string, field: Field) => void }) {
-  const cell = (label: string, field: Field, kind?: Kind) => (
+function OfferRow({
+  offer,
+  issues,
+  onOpen,
+}: {
+  offer: Offer
+  issues: number
+  onOpen: (label: string, field: Field) => void
+}) {
+  const cell = (label: string, field: Field, kind?: Kind, mono?: boolean) => (
     <td>
-      <FieldCell field={field} label={label} kind={kind} onOpen={onOpen} />
+      <FieldCell field={field} label={label} kind={kind} mono={mono} onOpen={onOpen} />
     </td>
   )
   return (
     <tr>
       <th scope="row">
-        {supplierName(offer.supplier_id)}
-        <div className="muted">
+        <div className="supplier">{supplierName(offer.supplier_id)}</div>
+        <div className="muted small mono">
           {offer.supplier_id} · round {offer.round}
         </div>
+        <div className="offer-checks">
+          {issues > 0 ? (
+            <span className="badge badge-sm badge-danger">
+              <Icon name="alert" size={12} />
+              {issues} {issues === 1 ? 'issue' : 'issues'}
+            </span>
+          ) : (
+            <span className="badge badge-sm badge-ok">
+              <Icon name="check" size={12} />
+              All checks passed
+            </span>
+          )}
+        </div>
       </th>
-      {cell('NDC', offer.ndc)}
+      {cell('NDC', offer.ndc, undefined, true)}
       <td>
         <div className="lots">
           {offer.lots.length === 0 && <span className="muted">—</span>}
           {offer.lots.map((lot, i) => (
-            <FieldCell key={i} field={lot} label={`lot ${i + 1}`} onOpen={onOpen} />
+            <FieldCell key={i} field={lot} label={`lot ${i + 1}`} mono onOpen={onOpen} />
           ))}
         </div>
       </td>
-      {cell('expiry', offer.expiry)}
+      {cell('expiry', offer.expiry, undefined, true)}
       {cell('quantity', offer.quantity, 'quantity')}
       {cell('unit price', offer.unit_price, 'price')}
       {cell('lead time', offer.lead_time_days, 'days')}
@@ -66,109 +90,109 @@ function OfferRow({ offer, onOpen }: { offer: Offer; onOpen: (label: string, fie
   )
 }
 
-export function CaseDetail({ caseId, onBack }: { caseId: string; onBack: () => void }) {
+export function CaseDetail({ caseId }: { caseId: string }) {
   const [data, error] = useLoad(() => getCase(caseId), [caseId])
   const [selection, setSelection] = useState<EvidenceSelection | null>(null)
 
-  if (error) return <p className="warning">Could not load {caseId}: {error}</p>
+  if (error) return <p className="notice notice-danger">Could not load {caseId}: {error}</p>
   if (!data) return <p className="muted">Loading {caseId}…</p>
 
   const { line_item: item, requirement: req } = data
+  const issuesFor = (supplierId: string) =>
+    data.exceptions.filter((text) => text.includes(`(${supplierId})`)).length
+
+  const specs: [string, ReactNode][] = [
+    ['Customer', customerName(req.customer_id)],
+    [
+      'Requested',
+      <>
+        {item.quantity.toLocaleString('en-US')} {item.unit}s
+        <div className="mono muted small">NDC {item.requested_ndc}</div>
+      </>,
+    ],
+    ['Dosage form', req.dosage_form],
+    ['Minimum expiry', <span className="mono">{req.min_expiry}</span>],
+    ['Lots', req.single_lot ? 'Single lot required' : 'Multiple lots allowed'],
+    ['Storage', req.storage_range],
+  ]
 
   return (
     <>
-      <button className="button-ghost back" onClick={onBack}>
-        ← All cases
-      </button>
-
-      <section className="card">
-        <div className="title-row">
-          <h2>
-            {data.case_id} · {item.product}
-          </h2>
+      <section className="panel case-hero">
+        <div className="case-hero-top">
+          <div>
+            <div className="eyebrow">Sourcing request · {data.case_id}</div>
+            <h2 className="case-title">{item.product}</h2>
+          </div>
           <StateBadge state={data.state} />
         </div>
-        <dl className="summary">
-          <div>
-            <dt>Customer</dt>
-            <dd>{customerName(req.customer_id)}</dd>
-          </div>
-          <div>
-            <dt>Requested</dt>
-            <dd>
-              {item.quantity.toLocaleString('en-US')} {item.unit}s
-              <div className="muted mono">NDC {item.requested_ndc}</div>
-            </dd>
-          </div>
-          <div>
-            <dt>Dosage form</dt>
-            <dd>{req.dosage_form}</dd>
-          </div>
-          <div>
-            <dt>Minimum expiry</dt>
-            <dd>{req.min_expiry}</dd>
-          </div>
-          <div>
-            <dt>Lots</dt>
-            <dd>{req.single_lot ? 'Single lot required' : 'Multiple lots allowed'}</dd>
-          </div>
-          <div>
-            <dt>Storage</dt>
-            <dd>{req.storage_range}</dd>
-          </div>
+        <dl className="spec-grid">
+          {specs.map(([label, value]) => (
+            <div className="spec" key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
         </dl>
       </section>
 
       {data.exceptions.length > 0 && (
-        <section className="exceptions-strip">
-          <h2>
-            Exceptions <span className="count">{data.exceptions.length}</span>
-          </h2>
-          <ul>
+        <section className="panel alerts" aria-label="Validation exceptions">
+          <header className="panel-head">
+            <h2>
+              <Icon name="alert" className="tone-danger" />
+              Validation exceptions <span className="count count-danger">{data.exceptions.length}</span>
+            </h2>
+            <span className="muted small">Raised by deterministic checks, not by the model.</span>
+          </header>
+          <ul className="alert-list">
             {data.exceptions.map((text, i) => (
-              <li key={i}>
-                <span>{text}</span>
-              </li>
+              <li key={i}>{text}</li>
             ))}
           </ul>
         </section>
       )}
 
-      <section className="card">
-        <h2>Offers</h2>
+      <section className="panel">
+        <header className="panel-head">
+          <h2>
+            Supplier offers <span className="count">{data.offers.length}</span>
+          </h2>
+          {data.offers.length > 0 && (
+            <span className="muted small">Click any value to open the sentence it came from.</span>
+          )}
+        </header>
         {data.offers.length === 0 ? (
-          <p className="muted">No supplier offers yet.</p>
+          <p className="empty">No supplier offers yet. Process the next email from the demo bar.</p>
         ) : (
-          <>
-            <p className="muted hint">Click any value to see the email it came from.</p>
-            <div className="table-scroll">
-              <table className="table offers">
-                <thead>
-                  <tr>
-                    <th>Supplier</th>
-                    <th>NDC</th>
-                    <th>Lots</th>
-                    <th>Expiry</th>
-                    <th>Quantity</th>
-                    <th>Unit price</th>
-                    <th>Lead time</th>
-                    <th>Storage</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.offers.map((offer) => (
-                    <OfferRow
-                      key={`${offer.supplier_id}-${offer.round}`}
-                      offer={offer}
-                      onOpen={(label, field) =>
-                        setSelection({ messageId: offer.source_message_id, label, field })
-                      }
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </>
+          <div className="table-scroll">
+            <table className="table offers">
+              <thead>
+                <tr>
+                  <th>Supplier</th>
+                  <th>NDC</th>
+                  <th>Lots</th>
+                  <th>Expiry</th>
+                  <th>Quantity</th>
+                  <th>Unit price</th>
+                  <th>Lead time</th>
+                  <th>Storage</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.offers.map((offer) => (
+                  <OfferRow
+                    key={`${offer.supplier_id}-${offer.round}`}
+                    offer={offer}
+                    issues={issuesFor(offer.supplier_id)}
+                    onOpen={(label, field) =>
+                      setSelection({ messageId: offer.source_message_id, label, field })
+                    }
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
 

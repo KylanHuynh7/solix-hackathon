@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { listAudit, verifyAudit, type VerifyResult } from '../api'
+import { Icon } from '../components/Icon'
 import { useLoad } from '../session'
 import type { AuditEvent } from '../types/contracts'
 
@@ -48,7 +49,7 @@ export function AuditView() {
   const [verifying, setVerifying] = useState(false)
   const [verifyError, setVerifyError] = useState<string | null>(null)
 
-  if (error) return <p className="warning">Could not load the ledger: {error}</p>
+  if (error) return <p className="notice notice-danger">Could not load the ledger: {error}</p>
   if (!events) return <p className="muted">Loading ledger…</p>
 
   const visible = events.filter((e) =>
@@ -73,9 +74,12 @@ export function AuditView() {
 
   return (
     <>
-      <section className="card verify-card">
-        <div>
-          <h2>Audit ledger</h2>
+      <section className="panel verify-card">
+        <span className="verify-icon">
+          <Icon name="link" size={22} />
+        </span>
+        <div className="verify-copy">
+          <h2>Hash-chained ledger</h2>
           <p className="muted">
             Append-only and hash-chained: each event's hash covers the previous one, so any edit or
             deleted row breaks the chain.
@@ -84,21 +88,23 @@ export function AuditView() {
         <div className="verify-actions">
           {verify &&
             (verify.ok ? (
-              <span className="verify verify-ok">✓ Chain verified · {verify.count} events</span>
+              <span className="verify verify-ok"><Icon name="check" size={16} />Chain verified · {verify.count} events</span>
             ) : (
               <span className="verify verify-bad">
-                ✕ Chain broken at seq {verify.first_broken_seq}
+                <Icon name="alert" size={16} />
+                Chain broken at seq {verify.first_broken_seq}
               </span>
             ))}
-          {verifyError && <span className="warning">{verifyError}</span>}
+          {verifyError && <span className="notice notice-danger">{verifyError}</span>}
           <button className="button-primary" onClick={runVerify} disabled={verifying}>
+            <Icon name="audit" size={16} />
             {verifying ? 'Verifying…' : 'Verify chain'}
           </button>
         </div>
       </section>
 
-      <section className="card">
-        <div className="title-row">
+      <section className="panel">
+        <div className="panel-head">
           <div className="tabs" role="tablist">
             {(
               [
@@ -119,6 +125,7 @@ export function AuditView() {
             ))}
           </div>
           <button className="button-ghost" onClick={() => exportCsv(visible)}>
+            <Icon name="download" size={16} />
             Export CSV ({visible.length})
           </button>
         </div>
@@ -139,11 +146,11 @@ export function AuditView() {
                 <tr key={e.seq} className={TONE[e.action] ?? ''}>
                   <td className="num mono">{e.seq}</td>
                   <td className="nowrap">{new Date(e.ts).toLocaleTimeString('en-US')}</td>
-                  <td className={e.actor.startsWith('human:') ? 'actor-human' : ''}>{e.actor}</td>
+                  <td className={e.actor.startsWith('human:') ? 'actor-human' : 'actor'}>{e.actor}</td>
                   <td>
-                    <span className="mono">{e.action}</span>
+                    <span className="mono action">{e.action}</span>
                     {e.action === 'tool_denied' && (
-                      <span className="badge badge-sm badge-danger"> denied</span>
+                      <span className="badge badge-sm badge-danger">denied</span>
                     )}
                   </td>
                   <td className="payload">{shortPayload(e.payload)}</td>

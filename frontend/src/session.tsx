@@ -111,6 +111,7 @@ function ApproverModal({ onDone }: { onDone: (name: string | null) => void }) {
           if (name.trim()) onDone(name.trim())
         }}
       >
+        <div className="eyebrow">Human approval</div>
         <h2>Who is approving?</h2>
         <p className="muted">
           Your name is recorded in the audit ledger with every approval in this session.

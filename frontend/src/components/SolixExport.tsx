@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getSolixBundle, USE_FIXTURES, type SolixBundle } from '../api'
+import { Icon } from './Icon'
 
 function download(caseId: string, bundle: SolixBundle) {
   const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' })
@@ -33,24 +34,30 @@ export function SolixExport({ caseId, closed }: { caseId: string; closed: boolea
 
   const verify = exported?.ledger.verify
   return (
-    <section className="card solix">
-      <div>
+    <section className="panel solix">
+      <span className="solix-icon">
+        <Icon name="archive" size={22} />
+      </span>
+      <div className="solix-copy">
         <h2>Solix archive</h2>
-        <p className="muted hint">
+        <p className="muted">
           {closed
             ? 'Case closed: export its evidence bundle (emails, fields with quotes, approvals, SAP documents, verified ledger) for governed retention.'
             : 'Exports the evidence bundle so far. Normally done when the case is Ordered.'}
         </p>
         {exported && verify && (
-          <p className={verify.ok ? 'solix-ok' : 'warning'}>
-            {verify.ok ? '✓' : '✕'} Exported {exported.ledger.events.length} ledger events
-            {verify.ok ? ' · chain verified' : ` · chain broken at seq ${verify.first_broken_seq}`}
-            {' · '}
-            {exported.sap_documents.length} SAP documents · sha256{' '}
-            <span className="mono">{exported.integrity.bundle_sha256.slice(0, 12)}…</span>
+          <p className={`verify ${verify.ok ? 'verify-ok' : 'verify-bad'} solix-result`}>
+            <Icon name={verify.ok ? 'check' : 'alert'} size={16} />
+            <span>
+              Exported {exported.ledger.events.length} ledger events
+              {verify.ok ? ' · chain verified' : ` · chain broken at seq ${verify.first_broken_seq}`}
+              {' · '}
+              {exported.sap_documents.length} SAP documents · sha256{' '}
+              <span className="mono">{exported.integrity.bundle_sha256.slice(0, 12)}…</span>
+            </span>
           </p>
         )}
-        {error && <p className="warning">{error}</p>}
+        {error && <p className="notice notice-danger">{error}</p>}
       </div>
       <button
         className={closed ? 'button-primary' : 'button-ghost'}
@@ -58,6 +65,7 @@ export function SolixExport({ caseId, closed }: { caseId: string; closed: boolea
         disabled={busy || USE_FIXTURES}
         title={USE_FIXTURES ? 'Needs the live API' : undefined}
       >
+        <Icon name="download" size={16} />
         {busy ? 'Exporting…' : 'Export Solix bundle'}
       </button>
     </section>

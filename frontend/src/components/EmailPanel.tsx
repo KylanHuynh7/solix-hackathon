@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getEmail } from '../api'
 import type { Email, Field } from '../types/contracts'
 import { HighlightedText } from './Highlight'
+import { Icon } from './Icon'
 
 export interface EvidenceSelection {
   messageId: string
@@ -49,26 +50,27 @@ export function EmailPanel({
             <div className="eyebrow">Source for {selection.label}</div>
             <h2>{email?.subject ?? 'Source email'}</h2>
           </div>
-          <button className="button-ghost" onClick={onClose} aria-label="Close">
-            ✕
+          <button className="button-ghost icon-button" onClick={onClose} aria-label="Close">
+            <Icon name="close" />
           </button>
         </header>
 
-        <div className="evidence-box">
-          <div>
-            <span className="muted">Evidence </span>
-            {evidence ? <code>{evidence}</code> : <span className="muted">none</span>}
+        <div className={`evidence-box ${field.status === 'verified' ? '' : 'evidence-review'}`}>
+          <div className="evidence-label">
+            <Icon name="link" size={15} />
+            Evidence quoted by the model
           </div>
-          {field.reason && <div className="muted">{field.reason}</div>}
+          {evidence ? <code className="evidence-quote">{evidence}</code> : <span className="muted">None</span>}
+          {field.reason && <div className="muted small">{field.reason}</div>}
           {email && evidence && !found && (
-            <div className="warning">
+            <div className="notice notice-danger">
               Evidence text not found in this email. Treat this value as unverified.
             </div>
           )}
         </div>
 
         {email === undefined && <p className="muted">Loading…</p>}
-        {email === null && <p className="warning">Email {selection.messageId} not found.</p>}
+        {email === null && <p className="notice notice-danger">Email {selection.messageId} not found.</p>}
         {email && (
           <>
             <dl className="email-meta">

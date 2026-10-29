@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { demoProcessNext, demoReset, demoStatus, USE_FIXTURES, type DemoStatus } from '../api'
 import { useRefresh } from '../session'
+import { Icon } from './Icon'
 
 const LABEL: Record<string, string> = {
   s1_offer: 'Supplier One offer',
@@ -87,9 +88,12 @@ export function DemoBar() {
   else text = status ? 'All seeded emails processed' : 'Connecting…'
 
   return (
-    <div className="demo-bar">
-      <span className="eyebrow">Demo</span>
-      <span className={`demo-next ${processing ? 'demo-processing' : ''}`}>{text}</span>
+    <div className="demo-bar" role="region" aria-label="Demo controls">
+      <span className="demo-tag">Demo</span>
+      <span className={`demo-next ${processing ? 'demo-processing' : ''}`}>
+        <span className="demo-dot" aria-hidden="true" />
+        {text}
+      </span>
       {message && !processing && <span className="demo-message">{message}</span>}
       <span className="spacer" />
       <button
@@ -97,6 +101,7 @@ export function DemoBar() {
         onClick={() => act('reset')}
         disabled={busy !== null || Boolean(processing)}
       >
+        <Icon name="reset" size={16} />
         {busy === 'reset' ? 'Resetting…' : 'Reset demo'}
       </button>
       <button
@@ -104,6 +109,7 @@ export function DemoBar() {
         onClick={() => act('next')}
         disabled={busy !== null || USE_FIXTURES || !next || Boolean(processing)}
       >
+        <Icon name="play" size={15} />
         {processing ? 'Processing…' : 'Process next email'}
       </button>
     </div>
