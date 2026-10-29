@@ -1,4 +1,4 @@
-# TransPharmic
+# Transpharmic
 
 Agent layer that reads pharma procurement emails, extracts NDC, lot and expiry with evidence,
 validates them, and drafts replies for a human to approve.
