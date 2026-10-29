@@ -30,7 +30,7 @@
       {
         "agent_type": "negotiator",
         "tool_input": {
-          "body": "Hi Alex,\n\nThank you for your quote for 1,200 pens of NDC 0169-4524-14 at USD 285.00 per pen. Two points do not match our requirements:\n\n1. Expiry: the offered expiry of 10/27 (2027-10-31) is earlier than our required minimum of 2028-06-30. We need stock with expiry on or after 2028-06-30.\n\n2. Single lot: the offer is split across 3 lots (A1001, A1002, A1003). We need all 1,200 pens from a single lot.\n\nPlease also confirm:\n- Price per pen for stock that meets the above (your quote was USD 285.00 per pen).\n- Lead time in days.\n- Storage condition of 2-8C.\n\nIf you cannot meet both points, please tell us what you can offer.\n\nBest regards,\nJamie Park\nNeuroBiz",
+          "body": "Hi Alex,\n\nThank you for your quote for 1,200 pens of NDC 0169-4524-14 at USD 285.00 per pen. Two points do not match our requirements:\n\n1. Expiry: the offered expiry of 10/27 (2027-10-31) is earlier than our required minimum of 2028-06-30. We need stock with expiry on or after 2028-06-30.\n\n2. Single lot: the offer is split across 3 lots (A1001, A1002, A1003). We need all 1,200 pens from a single lot.\n\nPlease also confirm:\n- Price per pen for stock that meets the above (your quote was USD 285.00 per pen).\n- Lead time in days.\n- Storage condition of 2-8C.\n\nIf you cannot meet both points, please tell us what you can offer.\n\nBest regards,\nJamie Park\nTransPharmic",
           "recipient_role": "supplier",
           "subject": "Re: RFQ: Semaglutide injection pens - CASE-001"
         },
